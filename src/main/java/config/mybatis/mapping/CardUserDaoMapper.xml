@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tv189.hospital.mybatis.dao.CardUserDao" >
+  <resultMap id="BaseResultMap" type="com.tv189.hospital.mybatis.model.CardUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="card_number" property="cardNumber" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+     <result column="update_time" property="updateTime" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, card_number, user_id, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+     id, card_number, password, status, update_time
+    from card_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+   <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+     id, card_number,user_id, update_time
+    from card_user
+    where user_id = #{cardNumber,jdbcType=VARCHAR}
+  </select>
+  <!-- 批量新增 Card User数据 -->
+   <insert id="insertCardUsers" parameterType="java.util.List">  
+    INSERT INTO card_user (card_number, user_id, update_time)  
+    VALUES   
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.cardNumber,jdbcType=VARCHAR},#{item.userId,jdbcType=VARCHAR},#{item.updateTime,jdbcType=VARCHAR}})  
+    </foreach>  
+  </insert> 
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from card_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insertCardUser" parameterType="com.tv189.hospital.mybatis.model.CardUser" >
+    insert into card_user (card_number,update_time,user_id)
+    values (#{cardNumber,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tv189.hospital.mybatis.model.CardInfo" >
+    insert into card_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="msg != null" >
+        msg,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="subjectids != null" >
+        subjectIds,
+      </if>
+      <if test="pushtargetid != null" >
+        pushTargetId,
+      </if>
+      <if test="sendstatus != null" >
+        sendStatus,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="checkstatus != null" >
+        checkStatus,
+      </if>
+      <if test="checkremark != null" >
+        checkRemark,
+      </if>
+      <if test="checktime != null" >
+        checkTime,
+      </if>
+      <if test="checker != null" >
+        checker,
+      </if>
+      <if test="isdelete != null" >
+        isDelete,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="lastupdater != null" >
+        lastUpdater,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime,
+      </if>
+      <if test="appid != null" >
+        appId,
+      </if>
+      <if test="contentid != null" >
+        contentId,
+      </if>
+      <if test="productid != null" >
+        productId,
+      </if>
+      <if test="clicktype != null" >
+        clickType,
+      </if>
+      <if test="clickparam != null" >
+        clickParam,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="pushid != null" >
+        pushId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="subjectids != null" >
+        #{subjectids,jdbcType=VARCHAR},
+      </if>
+      <if test="pushtargetid != null" >
+        #{pushtargetid,jdbcType=INTEGER},
+      </if>
+      <if test="sendstatus != null" >
+        #{sendstatus,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="checkstatus != null" >
+        #{checkstatus,jdbcType=INTEGER},
+      </if>
+      <if test="checkremark != null" >
+        #{checkremark,jdbcType=VARCHAR},
+      </if>
+      <if test="checktime != null" >
+        #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checker != null" >
+        #{checker,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdater != null" >
+        #{lastupdater,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appid != null" >
+        #{appid,jdbcType=BIGINT},
+      </if>
+      <if test="contentid != null" >
+        #{contentid,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="clicktype != null" >
+        #{clicktype,jdbcType=VARCHAR},
+      </if>
+      <if test="clickparam != null" >
+        #{clickparam,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="pushid != null" >
+        #{pushid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tv189.hospital.mybatis.model.CardInfo" >
+    update card_user
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        msg = #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="subjectids != null" >
+        subjectIds = #{subjectids,jdbcType=VARCHAR},
+      </if>
+      <if test="pushtargetid != null" >
+        pushTargetId = #{pushtargetid,jdbcType=INTEGER},
+      </if>
+      <if test="sendstatus != null" >
+        sendStatus = #{sendstatus,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="checkstatus != null" >
+        checkStatus = #{checkstatus,jdbcType=INTEGER},
+      </if>
+      <if test="checkremark != null" >
+        checkRemark = #{checkremark,jdbcType=VARCHAR},
+      </if>
+      <if test="checktime != null" >
+        checkTime = #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checker != null" >
+        checker = #{checker,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null" >
+        isDelete = #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdater != null" >
+        lastUpdater = #{lastupdater,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appid != null" >
+        appId = #{appid,jdbcType=BIGINT},
+      </if>
+      <if test="contentid != null" >
+        contentId = #{contentid,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        productId = #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="clicktype != null" >
+        clickType = #{clicktype,jdbcType=VARCHAR},
+      </if>
+      <if test="clickparam != null" >
+        clickParam = #{clickparam,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="pushid != null" >
+        pushId = #{pushid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tv189.hospital.mybatis.model.CardInfo" >
+    update card_user
+    set title = #{title,jdbcType=VARCHAR},
+      msg = #{msg,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      subjectIds = #{subjectids,jdbcType=VARCHAR},
+      pushTargetId = #{pushtargetid,jdbcType=INTEGER},
+      sendStatus = #{sendstatus,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      checkStatus = #{checkstatus,jdbcType=INTEGER},
+      checkRemark = #{checkremark,jdbcType=VARCHAR},
+      checkTime = #{checktime,jdbcType=TIMESTAMP},
+      checker = #{checker,jdbcType=VARCHAR},
+      isDelete = #{isdelete,jdbcType=INTEGER},
+      creater = #{creater,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastUpdater = #{lastupdater,jdbcType=VARCHAR},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      appId = #{appid,jdbcType=BIGINT},
+      contentId = #{contentid,jdbcType=VARCHAR},
+      productId = #{productid,jdbcType=VARCHAR},
+      clickType = #{clicktype,jdbcType=VARCHAR},
+      clickParam = #{clickparam,jdbcType=VARCHAR},
+      startTime = #{starttime,jdbcType=VARCHAR},
+      endTime = #{endtime,jdbcType=VARCHAR},
+      pushId = #{pushid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="CardInfoUpdate" parameterType="java.util.List">  
+	 UPDATE STUDENT SET name = "5566" WHERE id IN  
+	 <foreach collection="list" item="item" index="index" open="(" separator="," close=")" >  
+	        #{item}  
+	 </foreach>  
+  </update>  
+</mapper>

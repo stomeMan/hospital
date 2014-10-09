@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  	<jsp:include page="jquery-easyui-1.4/main.html" flush="" /> 
+  	<!-- jsp:include page="jquery-easyui-1.4/main.html" flush="" /> --> 
     <a href="hello.html">Say Hello</a>
   </body>
 </html>

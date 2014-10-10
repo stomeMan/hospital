@@ -31,7 +31,7 @@
 	<div class="header hide"> >中核员工体检管理系统 </div>
 	<div class="content">
 		<div class="title hide">管理登录</div>
-		<form id="form_login" action="user/toMain.action" method="post">
+		<form id="form_login" action="userm/toMain.action" method="post">
 			<fieldset>
 				<div class="input">
 					<input class="input_all name" name="name" id="name" placeholder="用户名" type="text" onFocus="this.className='input_all name_now';" onBlur="this.className='input_all name'" maxLength="24" />

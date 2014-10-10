@@ -1,10 +1,5 @@
 package com.tv189.hospital.controller;
 
-
-
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,29 +24,23 @@ public class PackAction {
 	private PackLogic packLogic;
 	@Autowired
 	private LoggerLogic loggerLogic;
+	
+	@RequestMapping("/sayhello")
+	@ResponseBody
+	public String sayHello(){
+		ResponseObject ro=new ResponseObject(0,"ok",null);
+		return JSON.toJSONString(ro);
+	}
+	
+	
+	
+	
 	@RequestMapping("/getpack")
 	@ResponseBody
 	public String gethospital(@RequestParam String user_id){
 		ResponseObject ro=new ResponseObject();
-//		String generateToken=Md5Helper.encode(time_stamp+"_"+user_id);
 		RequestObject requestObject=new RequestObject(user_id);
-//		if(token!=null&&token.equals(generateToken)){
-//			GetPackTreadPool gtp=GetPackTreadPool.getInstance();
-//			GetPackThread gt=new GetPackThread(loggerLogic, packLogic, requestObject,ro,request,response);
-//			gtp.execute(gt);
-//			Object data=gt.getResponseObject().getResult();
-			ro = packLogic.gethospital(requestObject);//packLogic.gethospital(uId);
-//			if(data==null){
-//				ro=new ResponseObject(1,"对不起，红包已被抢光了",null);
-//			}else{
-////				ro=new ResponseObject(0,"恭喜你领取红包成功，请记住卡号和密码",gt.getCardView());
-//				ro=new ResponseObject(0,"恭喜你领取红包成功，请记住卡号和密码",data);
-//			}
-//		}else{
-//			ro=new ResponseObject(101,"token失效",null);
-//		}
-
-		
+		ro = packLogic.gethospital(requestObject);//packLogic.gethospital(uId);
 		return JSON.toJSONString(ro);
 	}
 }

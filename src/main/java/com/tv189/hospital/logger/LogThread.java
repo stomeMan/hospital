@@ -14,7 +14,7 @@ import com.tv189.hospital.helper.DateHelper;
 import com.tv189.hospital.helper.LogConfigHelper;
 
 /**
- * @author xuezhiyu
+ * @author gaohailiang
  * 2014-6-18
  */
 public class LogThread extends Thread {

@@ -47,6 +47,23 @@ public class UserAction {
 		return JSON.toJSONString(ro);
 	}
 	
+	
+	@RequestMapping("/register")
+	@ResponseBody
+	public String register(HttpServletRequest request,HttpServletResponse response){
+		String userName=request.getParameter("name");
+		String password=request.getParameter("password");
+		System.out.println("userName:"+userName);
+		System.out.println("password:"+password);
+		if(userName==null||userName.length()==0){
+			userName="张三";
+		}
+		if(password==null||password.length()==0){
+			password="zhangsan";
+		}
+		ResponseObject ro=new ResponseObject(0,"ok",new Employment(userName, password));
+		return JSON.toJSONString(ro);
+	}
 	@RequestMapping("/sayhello")
 	@ResponseBody
 	public String sayHello(){

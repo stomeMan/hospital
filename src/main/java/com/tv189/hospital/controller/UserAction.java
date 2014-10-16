@@ -38,10 +38,12 @@ public class UserAction {
 		System.out.println("userName:"+userName);
 		System.out.println("password:"+password);
 		if(userName==null||userName.length()==0){
-			userName="张三";
+			ResponseObject ro=new ResponseObject(000001,"用户名不能为空","");
+			return JSON.toJSONString(ro);
 		}
 		if(password==null||password.length()==0){
-			password="zhangsan";
+			ResponseObject ro=new ResponseObject(000001,"密码不能为空","");
+			return JSON.toJSONString(ro);
 		}
 		ResponseObject ro=new ResponseObject(0,"ok",new Employment(userName, password));
 		return JSON.toJSONString(ro);

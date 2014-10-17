@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.tv189.hospital.logic.LoggerLogic;
 import com.tv189.hospital.logic.PackLogic;
-import com.tv189.hospital.pojo.Employment;
+import com.tv189.hospital.mybatis.model.User;
 import com.tv189.hospital.pojo.ResponseObject;
 
 /**
@@ -33,19 +33,21 @@ public class UserAction {
 	@RequestMapping("/login")
 	@ResponseBody
 	public String login(HttpServletRequest request,HttpServletResponse response){
-		String userName=request.getParameter("name");
+		String name=request.getParameter("name");
 		String password=request.getParameter("password");
-		System.out.println("userName:"+userName);
+		String nickName=request.getParameter("nickName");
+		System.out.println("userName:"+name);
 		System.out.println("password:"+password);
-		if(userName==null||userName.length()==0){
+		User user=new User(name, password);
+		if(name==null||name.length()==0){
 			ResponseObject ro=new ResponseObject(000001,"用户名不能为空","");
 			return JSON.toJSONString(ro);
 		}
 		if(password==null||password.length()==0){
-			ResponseObject ro=new ResponseObject(000001,"密码不能为空","");
+			ResponseObject ro=new ResponseObject(000002,"密码不能为空","");
 			return JSON.toJSONString(ro);
 		}
-		ResponseObject ro=new ResponseObject(0,"ok",new Employment(userName, password));
+		ResponseObject ro=new ResponseObject(0,"ok",new User(name, password));
 		return JSON.toJSONString(ro);
 	}
 	
@@ -63,7 +65,7 @@ public class UserAction {
 		if(password==null||password.length()==0){
 			password="zhangsan";
 		}
-		ResponseObject ro=new ResponseObject(0,"ok",new Employment(userName, password));
+		ResponseObject ro=new ResponseObject(0,"ok",new User(userName, password));
 		return JSON.toJSONString(ro);
 	}
 	@RequestMapping("/sayhello")

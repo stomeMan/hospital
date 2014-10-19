@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.tv189.hospital.logic.LoggerLogic;
-import com.tv189.hospital.logic.PackLogic;
+import com.tv189.hospital.logic.UserLogic;
 import com.tv189.hospital.mybatis.model.User;
 import com.tv189.hospital.pojo.ResponseObject;
 
@@ -25,7 +25,7 @@ import com.tv189.hospital.pojo.ResponseObject;
 @RequestMapping("/user")
 public class UserAction {
 	@Autowired
-	private PackLogic packLogic;
+	private UserLogic userLogic;
 	@Autowired
 	private LoggerLogic loggerLogic;
 	
@@ -36,36 +36,43 @@ public class UserAction {
 		String name=request.getParameter("name");
 		String password=request.getParameter("password");
 		String nickName=request.getParameter("nickName");
-		System.out.println("userName:"+name);
-		System.out.println("password:"+password);
-		User user=new User(name, password);
+		ResponseObject ro=null;
 		if(name==null||name.length()==0){
-			ResponseObject ro=new ResponseObject(000001,"用户名不能为空","");
+			ro=new ResponseObject(000001,"用户名不能为空","");
 			return JSON.toJSONString(ro);
 		}
 		if(password==null||password.length()==0){
-			ResponseObject ro=new ResponseObject(000002,"密码不能为空","");
+			ro=new ResponseObject(000002,"密码不能为空","");
 			return JSON.toJSONString(ro);
 		}
-		ResponseObject ro=new ResponseObject(0,"ok",new User(name, password));
+		ro=userLogic.register(name, password, nickName);
 		return JSON.toJSONString(ro);
 	}
 	
-	
+	/*
+	 * 
+	 */
 	@RequestMapping("/register")
 	@ResponseBody
 	public String register(HttpServletRequest request,HttpServletResponse response){
-		String userName=request.getParameter("name");
+		String name=request.getParameter("name");
 		String password=request.getParameter("password");
-		System.out.println("userName:"+userName);
-		System.out.println("password:"+password);
-		if(userName==null||userName.length()==0){
-			userName="张三";
+		String password1=request.getParameter("password1");
+		String nickName=request.getParameter("nickName");
+		ResponseObject ro=null;
+		if(name==null||name.length()==0){
+			ro=new ResponseObject(000001,"用户名不能为空","");
+			return JSON.toJSONString(ro);
 		}
 		if(password==null||password.length()==0){
-			password="zhangsan";
+			ro=new ResponseObject(000002,"密码不能为空","");
+			return JSON.toJSONString(ro);
 		}
-		ResponseObject ro=new ResponseObject(0,"ok",new User(userName, password));
+		if(password1==null||password1.length()==0||password.indexOf(password1)==-1){
+			ro=new ResponseObject(000002,"请确保两次输入密码相同","");
+			return JSON.toJSONString(ro);
+		}
+		ro=userLogic.register(name, password, nickName);
 		return JSON.toJSONString(ro);
 	}
 	@RequestMapping("/sayhello")
@@ -75,7 +82,10 @@ public class UserAction {
 		return JSON.toJSONString(ro);
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 */
 	@RequestMapping("/datagrid_data2")
 	@ResponseBody
 	public String gethospital(){

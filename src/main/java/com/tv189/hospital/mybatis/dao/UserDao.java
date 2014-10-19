@@ -5,8 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.tv189.hospital.mybatis.model.CardInfo;
-import com.tv189.hospital.mybatis.model.CardUser;
+import com.tv189.hospital.mybatis.model.User;
 
 @Repository
 public interface UserDao extends ISqlDao{
@@ -14,15 +13,12 @@ public interface UserDao extends ISqlDao{
 	
     public int deleteByPrimaryKey(Integer id);
 
-    public int insert(CardUser record);
+    public int insert(User record);
+    public User selectByPrimaryKey(Integer id);
+    public User selectByName(String name);
+    
+    public int insertUsers(List<User> users);
+    public List<User> selectByStatus(Integer status);
 
-    public int insertCardUser(CardUser record);
-    public int insertCardUsers(List<CardUser> cardUsers);
-    public CardInfo selectByPrimaryKey(Integer id);
-    public CardUser selectByUserId(String userId);
-    public List<CardInfo> selectByStatus(Integer status);
 
-    public int updateByPrimaryKeySelective(CardUser record);
-
-    public int updateByPrimaryKey(CardUser record);
 }

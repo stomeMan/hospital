@@ -1,6 +1,15 @@
 package com.tv189.hospital.mybatis.model;
 
-public class User {
+import java.io.Serializable;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class User implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -922144682743203644L;
 	private int  id;
 	private String name;
 	private String password;
@@ -9,8 +18,9 @@ public class User {
 	private String age;
 	private String gender;
 	
-	
-	
+	public User(){
+		
+	}
 	
 	public User(String name, String password) {
 		super();

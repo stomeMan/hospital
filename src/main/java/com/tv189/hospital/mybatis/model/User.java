@@ -11,7 +11,7 @@ public class User implements Serializable{
 	 */
 	private static final long serialVersionUID = -922144682743203644L;
 	private int  id;
-	private String name;
+	private String userName;
 	private String password;
 	private String nickName;
 	private String registerTime;
@@ -22,20 +22,23 @@ public class User implements Serializable{
 		
 	}
 	
-	public User(String name, String password) {
+	public User(String userName, String password) {
 		super();
-		this.name = name;
+		this.userName = userName;
 		this.password = password;
 	}
 	
 	
 	
-	public String getName() {
-		return name;
+	
+	public String getUserName() {
+		return userName;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
+
 	public String getPassword() {
 		return password;
 	}

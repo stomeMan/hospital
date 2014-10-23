@@ -29,14 +29,14 @@ public class UserLogic {
 	 * @param nickName
 	 * @return
 	 */
-	public ResponseObject register(String name,String password,String nickName){
+	public ResponseObject register(String userName,String password,String nickName){
 		ResponseObject ro=null;
-		User user =userDao.selectByName(name);
+		User user =userDao.selectByName(userName);
 		if(user!=null){
-			ro=new ResponseObject(0005, "该用户名："+user.getName()+"已经存在请重新选择", "");
+			ro=new ResponseObject(0005, "该用户名："+user.getUserName()+"已经存在请重新选择", "");
 			return ro;
 		}
-		user=new User(name,password);
+		user=new User(userName,password);
 		user.setRegisterTime(DateHelper.getDateTimeByNow());
 		user=this.insertUser(user);
 		if(user!=null){
@@ -54,11 +54,11 @@ public class UserLogic {
 	 * @param nickName
 	 * @return
 	 */
-	public ResponseObject login(String name,String password,String nickName){
+	public ResponseObject login(String userName,String password,String nickName){
 		ResponseObject ro=null;
-		User user =userDao.selectByName(name);
+		User user =userDao.selectByName(userName);
 		user.setRegisterTime(DateHelper.getDateTimeByNow());
-		user=this.getUserByName(name);
+		user=this.getUserByName(userName);
 		if(user!=null){
 			ro=new ResponseObject(0,"登录成功",user);
 			return ro;
@@ -73,7 +73,7 @@ public class UserLogic {
 	 */
 	public User insertUser(User user){
 		userDao.insert(user);
-		return userDao.selectByName(user.getName());
+		return userDao.selectByName(user.getUserName());
 	}
 	public User getUserByName(String name){
 		return userDao.selectByName(name);

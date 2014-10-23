@@ -10,10 +10,52 @@ Target Server Type    : MYSQL
 Target Server Version : 50704
 File Encoding         : 65001
 
-Date: 2014-10-19 22:15:58
+Date: 2014-10-23 21:51:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `check_project_detail`
+-- ----------------------------
+DROP TABLE IF EXISTS `check_project_detail`;
+CREATE TABLE `check_project_detail` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `project_number` varchar(128) DEFAULT NULL,
+  `project_name` varchar(128) DEFAULT NULL,
+  `check_number` varchar(128) DEFAULT NULL,
+  `project_result` varchar(128) DEFAULT NULL,
+  `project_unit` varchar(128) DEFAULT NULL,
+  `project_reference_range` varchar(128) DEFAULT NULL,
+  `project_tips` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of check_project_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `check_project_info`
+-- ----------------------------
+DROP TABLE IF EXISTS `check_project_info`;
+CREATE TABLE `check_project_info` (
+  `id` int(20) NOT NULL,
+  `username` varchar(128) DEFAULT NULL,
+  `check_numer` varchar(128) NOT NULL,
+  `check_name` varchar(128) DEFAULT NULL,
+  `sign_number` varchar(128) DEFAULT NULL,
+  `doctor_name` varchar(128) DEFAULT NULL,
+  `doctor_number` varchar(128) DEFAULT NULL,
+  `check_date` varchar(128) DEFAULT NULL,
+  `office_summary` varchar(1024) DEFAULT NULL,
+  `office_advise` varchar(2048) DEFAULT NULL,
+  PRIMARY KEY (`id`,`check_numer`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of check_project_info
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `user`
@@ -21,14 +63,14 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) NOT NULL DEFAULT '',
+  `user_name` varchar(128) NOT NULL DEFAULT '',
   `password` varchar(128) NOT NULL DEFAULT '',
   `nick_name` varchar(128) DEFAULT '',
   `gender` varchar(4) DEFAULT NULL,
   `age` int(4) DEFAULT NULL,
   `register_time` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name_index` (`name`) USING HASH
+  UNIQUE KEY `name_index` (`user_name`) USING HASH
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------

@@ -24,7 +24,7 @@ public class UserLogic {
 	
 	/**
 	 * 
-	 * @param name 登录名
+	 * @param name 用户名
 	 * @param password
 	 * @param nickName
 	 * @return
@@ -49,12 +49,34 @@ public class UserLogic {
 	
 	/**
 	 * 
+	 * @param name 登录名
+	 * @param password
+	 * @param nickName
+	 * @return
+	 */
+	public ResponseObject login(String name,String password,String nickName){
+		ResponseObject ro=null;
+		User user =userDao.selectByName(name);
+		user.setRegisterTime(DateHelper.getDateTimeByNow());
+		user=this.getUserByName(name);
+		if(user!=null){
+			ro=new ResponseObject(0,"登录成功",user);
+			return ro;
+		}
+		return ro=new ResponseObject(000001,"未知错误",user);
+	}
+	
+	/**
+	 * 
 	 * @param user
 	 * @return
 	 */
 	public User insertUser(User user){
 		userDao.insert(user);
 		return userDao.selectByName(user.getName());
+	}
+	public User getUserByName(String name){
+		return userDao.selectByName(name);
 	}
 	
 	

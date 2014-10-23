@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.tv189.hospital.logic.LoggerLogic;
 import com.tv189.hospital.logic.UserLogic;
-import com.tv189.hospital.mybatis.model.User;
 import com.tv189.hospital.pojo.ResponseObject;
 
 /**
@@ -45,7 +44,10 @@ public class UserAction {
 			ro=new ResponseObject(000002,"密码不能为空","");
 			return JSON.toJSONString(ro);
 		}
-		ro=userLogic.register(name, password, nickName);
+		ro=userLogic.login(name, password, nickName);
+		if(ro.getResult() instanceof Object){
+			request.setAttribute("user", ro.getResult());
+		}
 		return JSON.toJSONString(ro);
 	}
 	
@@ -73,12 +75,7 @@ public class UserAction {
 			return JSON.toJSONString(ro);
 		}
 		ro=userLogic.register(name, password, nickName);
-		return JSON.toJSONString(ro);
-	}
-	@RequestMapping("/sayhello")
-	@ResponseBody
-	public String sayHello(){
-		ResponseObject ro=new ResponseObject(0,"ok",null);
+		
 		return JSON.toJSONString(ro);
 	}
 	

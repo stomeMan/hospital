@@ -57,13 +57,17 @@ public class UserLogic {
 	public ResponseObject login(String userName,String password,String nickName){
 		ResponseObject ro=null;
 		User user =userDao.selectByName(userName);
-		user.setRegisterTime(DateHelper.getDateTimeByNow());
-		user=this.getUserByName(userName);
 		if(user!=null){
-			ro=new ResponseObject(0,"登录成功",user);
-			return ro;
+			if(user.getPassword().equals(password)){
+				ro=new ResponseObject(0,"登录成功",user);
+				return ro;
+			}else{
+				ro=new ResponseObject(005,"密码错误","");
+				return ro;
+			}
+		
 		}
-		return ro=new ResponseObject(000001,"未知错误",user);
+		return ro=new ResponseObject(000001,"用户未注册，或用户名错误",null);
 	}
 	
 	/**

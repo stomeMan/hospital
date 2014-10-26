@@ -1,4 +1,4 @@
-package com.tv189.test;
+package com.test;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -44,8 +44,8 @@ public class InsertData {
 //		conn.createStatement();
 //		//获取对象  
 //		userDsm = session.getMapper(UserDsm.class);  
-//		......  
-//		userDsm.addUser(...);  
+//		...  
+//		userDsm.addUser(..);  
 		
 	}
 	

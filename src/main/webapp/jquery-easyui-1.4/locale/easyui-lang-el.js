@@ -4,7 +4,7 @@ if ($.fn.pagination){
 	$.fn.pagination.defaults.displayMsg = 'Εμφάνιση {from} εώς {to} από {total} αντικείμενα';
 }
 if ($.fn.datagrid){
-	$.fn.datagrid.defaults.loadMsg = 'Γίνεται Επεξεργασία, Παρακαλώ Περιμένετε ...';
+	$.fn.datagrid.defaults.loadMsg = 'Γίνεται Επεξεργασία, Παρακαλώ Περιμένετε ..';
 }
 if ($.fn.treegrid && $.fn.datagrid){
 	$.fn.treegrid.defaults.loadMsg = $.fn.datagrid.defaults.loadMsg;

@@ -4,12 +4,12 @@ if ($.fn.pagination){
     $.fn.pagination.defaults.displayMsg = '{from} ile {to} arası gösteriliyor, toplam {total} kayıt';
 }
 if ($.fn.datagrid){
-    $.fn.panel.defaults.loadingMessage = "Yükleniyor...";
+    $.fn.panel.defaults.loadingMessage = "Yükleniyor..";
 }
 
 if ($.fn.datagrid){
-    $.fn.datagrid.defaults.loadingMessage = "Yükleniyor...";
-    $.fn.datagrid.defaults.loadMsg = 'İşleminiz Yapılıyor, lütfen bekleyin ...';
+    $.fn.datagrid.defaults.loadingMessage = "Yükleniyor..";
+    $.fn.datagrid.defaults.loadMsg = 'İşleminiz Yapılıyor, lütfen bekleyin ..';
 }
 if ($.fn.treegrid && $.fn.datagrid){
     $.fn.treegrid.defaults.loadMsg = $.fn.datagrid.defaults.loadMsg;

@@ -22,7 +22,7 @@
 		</javaTypeResolver>
 		
 		<!-- targetProject:自动生成代码的位置 -->
-		<javaModelGenerator targetPackage="com.tv189.hospital.mybatis.model" targetProject="hospital">
+		<javaModelGenerator targetPackage="com.hospital.mybatis.model" targetProject="hospital">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="true"/>
 			<!-- 从数据库返回的值被清理前后的空格  -->
@@ -33,7 +33,7 @@
 			<property name="enableSubPackages" value="true"/>
 		</sqlMapGenerator>
 		
-		<javaClientGenerator type="XMLMAPPER" targetPackage="com.tv189.hospital.mybatis.dao" targetProject="hospital">
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.hospital.mybatis.dao" targetProject="hospital">
 			<property name="enableSubPackages" value="true"/>
 		</javaClientGenerator>
 		<table tableName="user" domainObjectName="UserDao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">

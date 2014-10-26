@@ -1,6 +1,6 @@
 package com.test;
 
-import com.tv189.hospital.helper.Md5Helper;
+import com.hospital.helper.Md5Helper;
 
 public class TestToken {
 	public static void main(String[] args) {

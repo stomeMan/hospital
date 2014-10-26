@@ -4,7 +4,7 @@ if ($.fn.pagination){
 	$.fn.pagination.defaults.displayMsg = "Veient {from} a {to} de {total} d'articles";
 }
 if ($.fn.datagrid){
-	$.fn.datagrid.defaults.loadMsg = 'Elaboració, si us plau esperi ...';
+	$.fn.datagrid.defaults.loadMsg = 'Elaboració, si us plau esperi ..';
 }
 if ($.fn.treegrid && $.fn.datagrid){
 	$.fn.treegrid.defaults.loadMsg = $.fn.datagrid.defaults.loadMsg;

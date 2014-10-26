@@ -4,7 +4,7 @@ if ($.fn.pagination){
 	$.fn.pagination.defaults.displayMsg = 'Показани {from} за {to} от {total} продукти';
 }
 if ($.fn.datagrid){
-	$.fn.datagrid.defaults.loadMsg = 'Обработка, моля изчакайте ...';
+	$.fn.datagrid.defaults.loadMsg = 'Обработка, моля изчакайте ..';
 }
 if ($.fn.treegrid && $.fn.datagrid){
 	$.fn.treegrid.defaults.loadMsg = $.fn.datagrid.defaults.loadMsg;

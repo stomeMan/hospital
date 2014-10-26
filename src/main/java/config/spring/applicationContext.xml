@@ -50,8 +50,8 @@
 	
     <!-- 通过扫描的模式，扫描目录 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-    	<property name="basePackage" value="com.tv189.hospital.mybatis.dao" />
-    	<property name="markerInterface" value="com.tv189.hospital.mybatis.dao.ISqlDao"/>
+    	<property name="basePackage" value="com.hospital.mybatis.dao" />
+    	<property name="markerInterface" value="com.hospital.mybatis.dao.ISqlDao"/>
     	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 	</bean>
 	

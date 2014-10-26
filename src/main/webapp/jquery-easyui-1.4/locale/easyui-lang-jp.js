@@ -4,7 +4,7 @@ if ($.fn.pagination){
 	$.fn.pagination.defaults.displayMsg = '全 {total} アイテム中 {from} から {to} を表示中';
 }
 if ($.fn.datagrid){
-	$.fn.datagrid.defaults.loadMsg = '処理中です。少々お待ちください...';
+	$.fn.datagrid.defaults.loadMsg = '処理中です。少々お待ちください..';
 }
 if ($.fn.treegrid && $.fn.datagrid){
 	$.fn.treegrid.defaults.loadMsg = $.fn.datagrid.defaults.loadMsg;

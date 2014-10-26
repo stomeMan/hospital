@@ -4,7 +4,7 @@ if ($.fn.pagination){
 	$.fn.pagination.defaults.displayMsg = 'Դիտել {from}-ից {to}-ը {total} գրառումից';
 }
 if ($.fn.datagrid){
-	$.fn.datagrid.defaults.loadMsg = 'Մշակվում է, խնդրում ենք սպասել ...';
+	$.fn.datagrid.defaults.loadMsg = 'Մշակվում է, խնդրում ենք սպասել ..';
 }
 if ($.fn.treegrid && $.fn.datagrid){
 	$.fn.treegrid.defaults.loadMsg = $.fn.datagrid.defaults.loadMsg;

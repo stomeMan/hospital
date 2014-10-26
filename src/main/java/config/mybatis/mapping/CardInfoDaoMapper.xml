@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tv189.hospital.mybatis.dao.PackDao">
-	<resultMap id="BaseResultMap" type="com.tv189.hospital.mybatis.model.CardInfo">
+<mapper namespace="com.hospital.mybatis.dao.PackDao">
+	<resultMap id="BaseResultMap" type="com.hospital.mybatis.model.CardInfo">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="card_number" property="cardNumber" jdbcType="VARCHAR" />
 		<result column="password" property="password" jdbcType="VARCHAR" />
@@ -44,7 +44,7 @@
 			#{item}
 		</foreach>
 	</update>
-	<insert id="insert" parameterType="com.tv189.hospital.mybatis.model.CardUser" >
+	<insert id="insert" parameterType="com.hospital.mybatis.model.CardUser" >
     	insert into card_info (card_number, password, status, update_time)
    		 values (#{cardNumber,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR})
  	 </insert>
@@ -55,7 +55,7 @@
     	 (#{item.cardNumber,jdbcType=VARCHAR},#{item.password,jdbcType=VARCHAR}, #{item.status,jdbcType=INTEGER}, #{item.updateTime,jdbcType=VARCHAR})
     </foreach>  
   </insert> 
-	<insert id="insertSelective" parameterType="com.tv189.hospital.mybatis.model.CardInfo">
+	<insert id="insertSelective" parameterType="com.hospital.mybatis.model.CardInfo">
 		insert into pa_msg_info
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -212,7 +212,7 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.tv189.hospital.mybatis.model.CardInfo">
+	<update id="updateByPrimaryKeySelective" parameterType="com.hospital.mybatis.model.CardInfo">
 		update pa_msg_info
 		<set>
 			<if test="title != null">
@@ -290,7 +290,7 @@
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
-	<update id="updateCardInfo" parameterType="com.tv189.hospital.mybatis.model.CardInfo">
+	<update id="updateCardInfo" parameterType="com.hospital.mybatis.model.CardInfo">
 		update card_info
 <!-- 		set card_number = #{cardNumber,jdbcType=VARCHAR}, -->
 <!-- 		password = #{password,jdbcType=VARCHAR}, -->

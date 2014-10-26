@@ -208,7 +208,7 @@ Version 1.2.6
  * layout: Allow users to create collapsed layout panels by assigning 'collapsed' property to true.
  * layout: Add 'add' and 'remove' methods that allow users to dynamically add or remove region panel.
  * layout: Additional tool icons can be added on region panel header.
- * calendar: Add 'firstDay' option that allow users to set first day of week. Sunday is 0, Monday is 1, ...
+ * calendar: Add 'firstDay' option that allow users to set first day of week. Sunday is 0, Monday is 1, ..
  * tree: Add 'lines' option, true to display tree lines. 
  * tree: Add 'loadFilter' option that allow users to change data format before loading into the tree.
  * tree: Add 'loader' option that allow users to define how to load data from remote server.

@@ -4,7 +4,7 @@ if ($.fn.pagination){
 	$.fn.pagination.defaults.displayMsg = 'Zobrazuji {from} do {to} z {total} položky';
 }
 if ($.fn.datagrid){
-	$.fn.datagrid.defaults.loadMsg = 'Zpracování, čekejte prosím ...';
+	$.fn.datagrid.defaults.loadMsg = 'Zpracování, čekejte prosím ..';
 }
 if ($.fn.treegrid && $.fn.datagrid){
 	$.fn.treegrid.defaults.loadMsg = $.fn.datagrid.defaults.loadMsg;

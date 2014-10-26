@@ -26,7 +26,7 @@
 	</settings>
  
 <!-- 	<typeAliases>
-		<typeAlias alias="pa_msg_info" type="com.tv189.hospital.model.pa_msg_info" />
+		<typeAlias alias="pa_msg_info" type="com.hospital.model.pa_msg_info" />
 	</typeAliases> -->
  
 	<plugins>

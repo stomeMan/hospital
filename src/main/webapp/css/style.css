@@ -2,28 +2,28 @@
 @import url("reset.css");
 /*主体部分*/
 .main{
-	background:url("../css/images/header_bg.png") top repeat-x;
+	background:url("./css/images/header_bg.png") top repeat-x;
 	min-width:1000px;
 	overflow:hidden;
 	width:100%;
 	height:auto
 }
 .header{
-	background:url("../css/images/logo_ico.png") no-repeat top left;
+	background:url("./css/images/logo_ico.png") no-repeat top left;
 	margin:123px auto 0;
 	width:330px;
 	height:41px
 }
 /*中部内容部分*/
 .content{
-	background:url("../css/images/login_bg.png") no-repeat top center;
+	background:url("./css/images/login_bg.png") no-repeat top center;
 	margin:69px auto 0;
 	width:423px;
 	height:366px;
 	border:1px solid #ededed
 }
 .title{
-	background:url("../css/images/member_title.png") no-repeat top left;
+	background:url("./css/images/member_title.png") no-repeat top left;
 	margin:37px auto 20px;
 	width:229px;
 	height:36px
@@ -43,22 +43,22 @@
 	height:30px
 }
 .name{
-	background:url("../css/images/input_name.png") no-repeat top left
+	background:url("./css/images/input_name.png") no-repeat top left
 }
 .name_now{
-	background:url("../css/images/input_name_hover.png") no-repeat top left
+	background:url("./css/images/input_name_hover.png") no-repeat top left
 }
 .password{
-	background:url("../css/images/input_password.png") no-repeat top left
+	background:url("./css/images/input_password.png") no-repeat top left
 }
 .password_now{
-	background:url("../css/images/input_password_hover.png") no-repeat top left
+	background:url("./css/images/input_password_hover.png") no-repeat top left
 }
 .enter{
 	margin-top:15px
 }
 .button{
-	background:url("../css/images/button.png") no-repeat center;
+	background:url("./css/images/button.png") no-repeat center;
 	border:none;
 	cursor:pointer;
 	margin:0 auto;

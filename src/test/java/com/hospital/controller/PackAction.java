@@ -1,4 +1,4 @@
-package com.tv189.hospital.controller;
+package com.hospital.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.tv189.hospital.logic.LoggerLogic;
-import com.tv189.hospital.logic.PackLogic;
-import com.tv189.hospital.pojo.RequestObject;
-import com.tv189.hospital.pojo.ResponseObject;
+import com.hospital.logic.LoggerLogic;
+import com.hospital.logic.PackLogic;
+import com.hospital.pojo.RequestObject;
+import com.hospital.pojo.ResponseObject;
 
 /**
  * @author gaohailiang

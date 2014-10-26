@@ -4,7 +4,7 @@ if ($.fn.pagination){
 	$.fn.pagination.defaults.displayMsg = 'Viser {from} til {to} af {total} poster';
 }
 if ($.fn.datagrid){
-	$.fn.datagrid.defaults.loadMsg = 'Behandling, vent venligst ...';
+	$.fn.datagrid.defaults.loadMsg = 'Behandling, vent venligst ..';
 }
 if ($.fn.treegrid && $.fn.datagrid){
 	$.fn.treegrid.defaults.loadMsg = $.fn.datagrid.defaults.loadMsg;

@@ -4,7 +4,7 @@ if ($.fn.pagination){
 	$.fn.pagination.defaults.displayMsg = 'Mostrando {from} a {to} de {total} elementos';
 }
 if ($.fn.datagrid){
-	$.fn.datagrid.defaults.loadMsg = 'Procesando, por favor espere ...';
+	$.fn.datagrid.defaults.loadMsg = 'Procesando, por favor espere ..';
 }
 if ($.fn.treegrid && $.fn.datagrid){
 	$.fn.treegrid.defaults.loadMsg = $.fn.datagrid.defaults.loadMsg;

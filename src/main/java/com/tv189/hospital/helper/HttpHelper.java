@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.Socket;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -16,74 +15,84 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.HttpVersion;
+import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.scheme.PlainSocketFactory;
-import org.apache.http.conn.scheme.Scheme;
-import org.apache.http.conn.scheme.SchemeRegistry;
-//import org.apache.http.impl.DefaultBHttpClientConnection;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.CoreConnectionPNames;
-import org.apache.http.params.CoreProtocolPNames;
-import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
-
-
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.tv189.hospital.constant.Constant;
 import com.tv189.hospital.logger.LogInfo;
 import com.tv189.hospital.logger.LogThread;
-import com.tv189.hospital.logic.LoggerLogic;
-
-
 
 public class HttpHelper {
-	private static ThreadSafeClientConnManager cm  = null;
-    static {
-        SchemeRegistry schemeRegistry = new SchemeRegistry();
-        schemeRegistry.register(new Scheme("http", 80, PlainSocketFactory.getSocketFactory()));
-        cm = new ThreadSafeClientConnManager(schemeRegistry);
-        cm.setMaxTotal(800);
-        cm.setDefaultMaxPerRoute(50);
-
-    }
 	private static final Log log = LogFactory.getLog(HttpHelper.class);
-
-	public static String doGet(String url, String charset) {
+	public static String doGetAtfilter(String url, String queryStr, String charset, boolean pretty,HttpServletRequest request) {
+		Date startTime=new Date();
 		String reInfo = "";
+		reInfo=executeGetRequest(url,queryStr,charset);
+		Date endTime=new Date();
+		HttpHelper.addProxyHttpLogNew(HttpUtil.getLocalURL(request),startTime,url, queryStr, reInfo.toString(),endTime);
+		return reInfo.toString();
+	}
+	/**
+	 * 
+	 * @param url
+	 * @param queryStr
+	 * @param charset
+	 * @param pretty
+	 * @return
+	 */
+	public static String doGet(String url, String queryStr, String charset, boolean pretty) {
+		String reInfo = "";
+		Date startTime=new Date();
+		reInfo=executeGetRequest(url,queryStr,charset);
+		Date endTime=new Date();
+		HttpHelper.addProxyHttpLogNew(HttpUtil.getLocalURL(null),startTime,url, queryStr, reInfo.toString(),endTime);
+		return reInfo.toString();
+	}
+	/**
+	 * 真正执行doGet请求的方法
+	 * @param url 要请求链接
+	 * @param queryStr 参数
+	 * @param charset 编码方式
+	 * @return
+	 */
+	private static String executeGetRequest(String url, String queryStr, String charset){
 		HttpClient httpclient = null;
 		InputStream in = null;
-//		String startTime=DateUtil.getDateTimeByDate(new Date());
+		String reInfo="";
 		try {
 			httpclient = HttpClientUtils.getHttpClient();
 			// HttpHelper.addProxyRequestLog(uuid, url, queryStr, "GET");
 			// 创建httpget.
-			HttpGet httpget = new HttpGet(url);
-			LoggerLogic.httpLog(url);
+			HttpGet httpget = new HttpGet(url + queryStr);
 			// 执行get请求.
 			HttpResponse response = httpclient.execute(httpget);
 			// 获取响应实体
 			HttpEntity entity = response.getEntity();
+			// // 打印响应状态
 			in = entity.getContent();
 			String reTemp = EntityUtils.toString(entity, charset);
 			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				reInfo = reTemp;
 			}
-		} catch (ClientProtocolException e) {
+		}catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -95,86 +104,26 @@ public class HttpHelper {
 				try {
 					in.close();
 				} catch (IOException e) {
-					log.error(e.getMessage());
+//					log.error(ExceptionInterceptor.getTrace(e));
 				}
 			}
 		}
-
-		return reInfo.toString();
+		return reInfo;
 	}
-	/**
-	 * 
-	 * @param url
-	 * @param queryStr
-	 * @param charset
-	 * @param pretty
-	 * @return
-	 * @throws IOException
-	 */
-	public static String doGet(String url,String queryStr,String charset) throws IOException {
-		return doGet(url+queryStr, queryStr,charset);
-	}
-	/**
-	 * 
-	 * @param url
-	 * @param pretty
-	 * @return
-	 * @throws IOException
-	 */
-	public static String doGet(String url) throws IOException {
-		return doGet(url,"UTF-8");
-	}
-	/**
-	 * 
-	 * @param url
-	 * @param pretty
-	 * @return
-	 * @throws IOException
-	 */
-	public static String doGet(String url,Map<String,String> params) throws IOException {
-		return doGet(url+getQueryString(params));
-	}
-	/**
-	 *传入Map<String,String> 返回 String,最前面带？ 
-	 * @param params
-	 * 
-	 * @return
-	 */
-	public static String getQueryString(Map<String,String> params){
-		StringBuilder queryString=new StringBuilder();
-		for (Map.Entry<String, String> entry : params.entrySet()) {
-			if(queryString.indexOf("?")==-1){
-				queryString.append("?");
-			}else{
-				queryString.append(StringHelper.URL_CONCAT); 
-			}
-			queryString.append(entry.getKey() + StringHelper.PARA_EQUAL + entry.getValue());
-			
-		}
-		return queryString.toString();
-	}
-/**
- * 
- * @param url
- * @param params
- * @param charset
- * @param pretty
- * @return
- */
- 	public static String doPost(String url, Map<String, String> params, String charset, boolean pretty) {
+	public static String doPost(String url, Map<String, String> params, String charset, boolean pretty) {
 
 		String reInfo = "";
 		InputStream in = null;
 		HttpClient httpclient = null;
 		HttpPost httppost = null;
 		UrlEncodedFormEntity uefEntity = null;
-		String startTime=DateUtil.getDateTimeByDate(new Date());
+		Date startTime=new Date();
 		try {
-			httpclient = getHttpClient();
+			httpclient = HttpClientUtils.getHttpClient();
 			httppost = new HttpPost(url);
 
 			// 创建参数队列
-			List<BasicNameValuePair> postValues = new ArrayList<BasicNameValuePair>();
+			List<NameValuePair> postValues = new ArrayList<NameValuePair>();
 			StringBuffer queryStr = new StringBuffer();
 			if (params != null) {
 				for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -191,48 +140,53 @@ public class HttpHelper {
 
 			HttpResponse response;
 			response = httpclient.execute(httppost);
+			Date endTime=new Date();
 			HttpEntity entity = response.getEntity();
 			// // 打印响应状态
-			System.out.println(response.getStatusLine());
 			in = entity.getContent();
 			String reTemp = HttpHelper.getStringByInputStream(entity.getContent(), pretty);
-//			String reTemp = EntityUtils.toString(entity, charset);
 			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				reInfo = reTemp;
 			}
 
+			HttpHelper.addProxyHttpLogNew(HttpUtil.getLocalURL(null),startTime,url, queryStr.toString(), reInfo.toString(),endTime);
 		} catch (ClientProtocolException e) {
-			log.error(e.getMessage());
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
-			log.error(e.getMessage());
 		} finally {
 			if (in != null) {
 				// 关闭连接,释放资源
 				try {
 					in.close();
 				} catch (IOException e) {
-					log.error(e.getMessage());
 				}
 			}
 		}
 		return reInfo;
 	}
-//	/**
-//	 * 
-//	 * @param uuid
-//	 * @param url
-//	 * @param queryStr
-//	 * @param reInfo
-//	 * @param reqType
-//	 
-//	public static void addProxyHttpLogNew(String localurl,String startTime, String url, String queryStr, String reInfo) {
-//		String loginfo="----start----"+startTime+"\n"+localurl+"\nrequest:"+url + "?"+ queryStr + "\nmsresponse:" + reInfo+"\n----end----";
-//		LogInfo logger = new LogInfo(LogConfigHelper.getProxyHttpLog(),loginfo,Constant.DAILY);
-//		LogThread.addLogInfo(logger);;
-//	}
-
+	/**
+	 * 
+	 * @param uuid
+	 * @param url
+	 * @param queryStr
+	 * @param reInfo
+	 * @param reqType
+	 */
+	public static void addProxyHttpLogNew(String localurl,Date startTime, String url, String queryStr, String reInfo,Date endTime) {
+		long usingTime=endTime.getTime()-startTime.getTime();
+		String startTimeStr=DateUtil.getDateTimeByDate(startTime);
+		String endTimeStr=DateUtil.getDateTimeByDate(endTime);
+		if(url!=null&&url.contains("?")||queryStr!=null&&queryStr.contains("?")){
+			url+=queryStr;
+		}else{
+			url=url+"?"+queryStr;
+		}
+	
+		String loginfo="----start----"+"\n"+startTimeStr+"\n"+localurl+"\nrequest:"+url+ "\nmsresponse:" + reInfo+"\nusedTime:"+usingTime+"\n"+endTimeStr+"\n----end----\n";
+		LogInfo logger = new LogInfo(LogConfigHelper.getProxyHttpLog(),loginfo,Constant.DAILY);
+		LogThread.addLogInfo(logger);
+	}
+	
 
 	public static String doPost(String url, Map<String, String> params) throws IllegalStateException, IOException {
 		String strResult = "";
@@ -269,7 +223,7 @@ public class HttpHelper {
 				}
 			}
 		} catch (IOException e) {
-			log.error(e.getMessage());
+//			log.error(ExceptionInterceptor.getTrace(e));
 		} finally {
 			if (reader != null) {
 				try {
@@ -283,7 +237,7 @@ public class HttpHelper {
 					}
 					reader.close();
 				} catch (IOException e) {
-					log.error(e.getMessage());
+//					log.error(ExceptionInterceptor.getTrace(e));
 				}
 			}
 		}
@@ -291,15 +245,6 @@ public class HttpHelper {
 
 	}
 
- 
-/**
- * 
- * @param url
- * @param headerMap
- * @param charset
- * @param bodyContent
- * @return
- */
 	@SuppressWarnings("finally")
 	public static String doPost(String url, Map<String, String> headerMap, String charset, String bodyContent) {
 
@@ -352,16 +297,71 @@ public class HttpHelper {
 		}
 	}
 
-	public static void main(String[] args) throws IOException {
-		String response=doGet("http://127.0.0.1:8080/mvc/helloword/hello.json");
-		System.out.println(response);
+	public static void main(String[] args) {
+
+		Map<String, String> params = new HashMap<String, String>();
+		String urlStr = "http://test.zuoanlong.com:8083/tysx/api/v1/question/screen";
+		// params.put("prgid", "98000000000000000001355725830536");
+		// params.put("devid", "000001");
+		// params.put("productid", "1000000054");
+
+		// urlStr="http://test.zuoanlong.com:8083/tysx/api/v1/exterps/expertsList";
+		// urlStr="http://test.zuoanlong.com:8083/tysx/api/v1/exterps/expertsdetails";
+		// params.put("expertid", "1049");
+		// params.put("useruid", "104211484674176130125");
+
+		// urlStr =
+		// "http://test.zuoanlong.com:8083/tysx/api/v1/exterps/requestvideochat";
+		// params.put("expertid", "1049");
+		// params.put("useruid", "104211484674176130125");
+		urlStr = "http://test.zuoanlong.com:8083/mmsadmin/api/v1/screen/push";
+		params.put("dev_id", "000002");
+
+		String data = doPost("http://192.168.99.33:9795/service/CmmService/tree_list?"
+				+ "devId=000002&appId=4321&rid=98000000000000000001355725830536"
+				+ "&uid=12313213123&size=20&uncount=0&isEditor=1&commentType=2&plat=8"
+				+ "&parentId=201309305c61e20299384e4996bc058a2c043cec&", null, "utf-8", false);
+		String datastr = data;
+		try {
+			JSONObject jsonObject = JsonHelper.toJSONObject(data, JSONObject.class);
+			Map map = (Map) jsonObject.get("info");
+			String dataStr = map.get("data").toString();
+			JSONArray jsonArray = JsonHelper.toJSONObject(dataStr, JSONArray.class);
+
+			for (int i = 0; i < jsonArray.size(); i++) {
+				JSONObject object = JsonHelper.toJSONObject(jsonArray.get(i).toString(), JSONObject.class);
+				String[] strs = object.keySet().toArray(new String[] {});
+				for (String str : strs) {
+					Object object2 = object.get(str);
+					if (str.toLowerCase().indexOf("time") > 0) {
+						continue;
+					}
+					if (object2 != null) {
+//						object2 = URLEncoder.encode(object2.toString(), SystemConfigHelper.UTF_8);
+						object.put(str, object2);
+					}
+				}
+				jsonArray.set(i, object);
+			}
+			map.put("data", jsonArray);
+			jsonObject.put("info", map);
+			data = JsonHelper.toJsonStr(jsonObject);
+			params.put("rid", "98000000000000000001355725830536");
+			// String s=URLDecoder.decode(datastr,SystemConfigHelper.UTF_8);
+			// s=URLEncoder.encode(datastr,SystemConfigHelper.UTF_8);
+			// System.out.println(s);
+			String resp = HttpHelper.doPost(urlStr, params, "utf-8", data);
+			// String resp_ = HttpHelper.doPost(urlStr,
+			// params,"utf-8",false,datastr);
+			System.out.println("" + resp);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("over!");
 
 	}
-    public static HttpClient getHttpClient() {
-        HttpParams params = new BasicHttpParams();
-        params.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-        params.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, "30000");
-
-        return new DefaultHttpClient(cm, params);
-    }
 }

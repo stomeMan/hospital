@@ -325,17 +325,33 @@ public class StringHelper {
 	    } 
 	    return reStr;
 	}
-	
+	/**
+	 * 暂时判断1开头的11位数字视为手机号码
+	 * @param phone
+	 * @return
+	 */
+	public static boolean isPhoneNumber(String phone){
+		if(phone==null||phone.length()!=11){
+			System.out.println("手机号不合法");
+			return false;
+		}
+		Pattern p = Pattern.compile("^((1[0-9]))\\d{9}$");
+		Matcher m = p.matcher(phone);
+		return m.matches();
+	}
 	public static void main(String... args){
 //		String r = StringHelper.resolveSecret("80260010300","000012","E02EEBF7D8FB40B08ACB1E89F43061CD");
 //		System.out.println(r);
 //		String b = StringHelper.deResolveSecret("80260010300", "000012", r);
 		//                      104320710704990092110509
 //		System.out.println(b);  104320710704990096980509    
-		String b = StringHelper.resolveUid("104318964800145120509", "000012");
-		System.out.println(b);
-		String r = StringHelper.unresolveUid(b,"000012");
-		System.out.println(r);
+//		String b = StringHelper.resolveUid("104318964800145120509", "000012");
+//		System.out.println(b);
+//		String r = StringHelper.unresolveUid(b,"000012");
+//		System.out.println(r);
+		
+		System.out.println(StringHelper.isPhoneNumber("1381786046"));
+		
 	}
 	
 }

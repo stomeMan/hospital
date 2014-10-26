@@ -21,7 +21,6 @@ public class UserLogic {
 	
 	
 	
-	
 	/**
 	 * 
 	 * @param name 用户名
@@ -46,6 +45,17 @@ public class UserLogic {
 		return ro=new ResponseObject(000001,"未知错误",user);
 	}
 	
+	/**
+	 * 
+	 * 获取手机验证码
+	 * @param phone 
+	 * @return
+	 */
+	public ResponseObject getCode(String phone){
+		
+		
+		return null;
+	}
 	
 	/**
 	 * 

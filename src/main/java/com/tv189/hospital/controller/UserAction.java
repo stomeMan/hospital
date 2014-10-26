@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.tv189.hospital.helper.StringHelper;
 import com.tv189.hospital.logic.LoggerLogic;
 import com.tv189.hospital.logic.UserLogic;
 import com.tv189.hospital.pojo.ResponseObject;
@@ -78,7 +79,47 @@ public class UserAction {
 		
 		return JSON.toJSONString(ro);
 	}
-	
+	/*
+	 * 
+	 */
+	@RequestMapping("/register")
+	@ResponseBody
+	public String codeRegister(HttpServletRequest request,HttpServletResponse response){
+		String name=request.getParameter("name");
+		String password=request.getParameter("password");
+		String password1=request.getParameter("password1");
+		String nickName=request.getParameter("nickName");
+		ResponseObject ro=null;
+		if(name==null||name.length()==0){
+			ro=new ResponseObject(000001,"用户名不能为空","");
+			return JSON.toJSONString(ro);
+		}
+		if(password==null||password.length()==0){
+			ro=new ResponseObject(000002,"密码不能为空","");
+			return JSON.toJSONString(ro);
+		}
+		if(password1==null||password1.length()==0||password.indexOf(password1)==-1){
+			ro=new ResponseObject(000002,"请确保两次输入密码相同","");
+			return JSON.toJSONString(ro);
+		}
+		ro=userLogic.register(name, password, nickName);
+		
+		return JSON.toJSONString(ro);
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/get_code")
+	@ResponseBody
+	public String getCode(HttpServletRequest request,HttpServletResponse response){
+		String phone=request.getParameter("phone");
+		ResponseObject ro=null;
+		if(StringHelper.isPhoneNumber(phone)){
+			ro=userLogic.getCode(phone);
+		}
+		return JSON.toJSONString(ro);
+	}
 	/**
 	 * 
 	 * @return

@@ -11,6 +11,9 @@ import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import com.alibaba.fastjson.JSON;
 
 /**
@@ -31,7 +34,7 @@ public class HttpUtil{
 	public static String getLocalURL(HttpServletRequest httpServletRequest){
 		if(httpServletRequest==null){
 			try {
-//				httpServletRequest =ServletActionContext.getRequest();
+				httpServletRequest=((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 			}catch(Exception e){
 				e.printStackTrace();
 			}

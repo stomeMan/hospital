@@ -9,13 +9,14 @@
 		<result column="gender" property="gender" jdbcType="VARCHAR" />
 		<result column="age" property="age" jdbcType="INTEGER" />
 		<result column="register_time" property="registerTime" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id,user_name,password,nick_name,gender,age,register_time
+		id,user_name,password,nick_name,gender,age,register_time,phone
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
-		select id,user_name,password,nick_name,gender,age,register_time
+		select id,user_name,password,nick_name,gender,age,register_time,phone
 		from user
 		where id = #{id,jdbcType=INTEGER}
 	</select>
@@ -23,9 +24,16 @@
 	<select id="selectByName" resultMap="BaseResultMap"
 		parameterType="java.lang.String">
 		select
-			id,user_name,password,nick_name,gender,age,register_time
+			id,user_name,password,nick_name,gender,age,register_time,phone
 		from user
 		where user_name = #{user_name,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByPhone" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+			id,user_name,password,nick_name,gender,age,register_time,phone
+		from user
+		where phone = #{phone,jdbcType=VARCHAR}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from pa_msg_info
@@ -38,6 +46,18 @@
 			set status = #{item.status,jdbcType=INTEGER} WHERE id =#{item.id}
 			#{item}
 		</foreach>
+	</update>
+	<update id="updateUser" parameterType="com.hospital.mybatis.model.User">
+		  update card_user
+		  user_name,password,nick_name,gender,age,register_time,phone
+		   set user_name = #{userName,jdbcType=VARCHAR},
+		      password = #{password,jdbcType=VARCHAR},
+		      nick_name = #{nickName,jdbcType=INTEGER},
+		      gender = #{gender,jdbcType=VARCHAR},
+		      age = #{age,jdbcType=INTEGER},
+		      register_time = #{registerTime,jdbcType=INTEGER},
+		      phone = #{status,jdbcType=INTEGER},
+		    where id = #{id,jdbcType=INTEGER}
 	</update>
 	<insert id="insert" parameterType="com.hospital.mybatis.model.User" >
     	insert into user (user_name,password,nick_name,gender,age,register_time)

@@ -1,4 +1,4 @@
-package com.api.cache;
+package com.hospital.cache;
 
 import java.util.ArrayList;
 import java.util.HashMap;

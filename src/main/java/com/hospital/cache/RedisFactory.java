@@ -1,4 +1,4 @@
-package com.api.cache;
+package com.hospital.cache;
 
 import org.apache.log4j.Logger;
 

@@ -1,4 +1,4 @@
-package com.api.cache;
+package com.hospital.cache;
 
 import redis.clients.jedis.Client;  
 import redis.clients.jedis.Jedis;  

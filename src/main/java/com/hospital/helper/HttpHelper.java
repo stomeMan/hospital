@@ -67,6 +67,29 @@ public class HttpHelper {
 		return reInfo.toString();
 	}
 	/**
+	 * 
+	 * @param url
+	 * @param queryStr
+	 * @param charset
+	 * @param pretty
+	 * @return
+	 */
+	public static String doGet(String url, String queryStr) {
+		return HttpHelper.doGet(url,queryStr,"UTF-8",false);
+	}
+	/**
+	 * 
+	 * @param url
+	 * @param queryStr
+	 * @param charset
+	 * @param pretty
+	 * @return
+	 */
+	public static String doGet(String url, Map<String,String> map) {
+		String queryStr=HttpHelper.getQueryStrByMap(map);
+		return HttpHelper.doGet(url,queryStr,"UTF-8",false);
+	}
+	/**
 	 * 真正执行doGet请求的方法
 	 * @param url 要请求链接
 	 * @param queryStr 参数
@@ -81,7 +104,15 @@ public class HttpHelper {
 			httpclient = HttpClientUtils.getHttpClient();
 			// HttpHelper.addProxyRequestLog(uuid, url, queryStr, "GET");
 			// 创建httpget.
-			HttpGet httpget = new HttpGet(url + queryStr);
+			if(queryStr==null){
+				queryStr="";
+			}
+			if(url.indexOf("?")==-1&&queryStr.indexOf("?")==-1){
+				url=url+"?"+queryStr;
+			}else{
+				url=url+queryStr;
+			}
+			HttpGet httpget = new HttpGet(url);
 			// 执行get请求.
 			HttpResponse response = httpclient.execute(httpget);
 			// 获取响应实体
@@ -187,7 +218,15 @@ public class HttpHelper {
 		LogThread.addLogInfo(logger);
 	}
 	
-
+	public static String getQueryStrByMap(Map<String,String> params){
+		StringBuffer queryStr=new StringBuffer();
+		for (Map.Entry<String, String> entry : params.entrySet()) {
+			queryStr.append(entry.getKey() + StringHelper.PARA_EQUAL + entry.getValue()+ StringHelper.URL_CONCAT);
+		}
+		
+		
+		return queryStr.toString();
+	}
 	public static String doPost(String url, Map<String, String> params) throws IllegalStateException, IOException {
 		String strResult = "";
 		DefaultHttpClient httpClient = new DefaultHttpClient();

@@ -17,6 +17,7 @@ public class User implements Serializable{
 	private String registerTime;
 	private String age;
 	private String gender;
+	private String phone;
 	
 	public User(){
 		
@@ -31,6 +32,14 @@ public class User implements Serializable{
 	
 	
 	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public String getUserName() {
 		return userName;
 	}

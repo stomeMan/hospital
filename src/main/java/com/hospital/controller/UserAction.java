@@ -82,18 +82,16 @@ public class UserAction {
 	/*
 	 * 
 	 */
-	@RequestMapping("/register")
+	@RequestMapping("/code_register")
 	@ResponseBody
 	public String codeRegister(HttpServletRequest request,HttpServletResponse response){
-		String name=request.getParameter("name");
 		String password=request.getParameter("password");
 		String password1=request.getParameter("password1");
-		String nickName=request.getParameter("nickName");
+//		String nickName=request.getParameter("nickName");
+		String code=request.getParameter("code");
+		String phone=request.getParameter("phone");
 		ResponseObject ro=null;
-		if(name==null||name.length()==0){
-			ro=new ResponseObject(000001,"用户名不能为空","");
-			return JSON.toJSONString(ro);
-		}
+	
 		if(password==null||password.length()==0){
 			ro=new ResponseObject(000002,"密码不能为空","");
 			return JSON.toJSONString(ro);
@@ -102,7 +100,7 @@ public class UserAction {
 			ro=new ResponseObject(000002,"请确保两次输入密码相同","");
 			return JSON.toJSONString(ro);
 		}
-		ro=userLogic.register(name, password, nickName);
+		ro=userLogic.codeRegister(phone, password, code);
 		
 		return JSON.toJSONString(ro);
 	}

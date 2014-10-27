@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hospital.helper.DateHelper;
+import com.hospital.helper.HttpHelper;
+import com.hospital.helper.StringHelper;
 import com.hospital.mybatis.dao.UserDao;
 import com.hospital.mybatis.model.User;
 import com.hospital.pojo.ResponseObject;
@@ -52,9 +54,36 @@ public class UserLogic {
 	 * @return
 	 */
 	public ResponseObject getCode(String phone){
-		
-		
-		return null;
+		ResponseObject ro=new ResponseObject();
+		ro.setCode(0);
+		ro.setMessage("请注意查收验证码");
+		String code=StringHelper.getRadomSixBitNum();
+		ro.setResult(HttpHelper.doGet("", "?code="+code));
+		return ro;
+	}
+	/**
+	 * 
+	 * @param name 用户名
+	 * @param password
+	 * @param nickName
+	 * @return
+	 */
+	public ResponseObject codeRegister(String password,String phone,String code){
+		ResponseObject ro=null;
+		User user =userDao.selectByName(phone);
+		if(user!=null){
+			ro=new ResponseObject(0005, "该手机号已注册："+user.getPhone()+"已经存在请重新选择", "");
+			return ro;
+		}
+		user=new User(null,password);
+		user.setRegisterTime(DateHelper.getDateTimeByNow());
+		user.setUserName(phone);
+		user=this.insertUser(user);
+		if(user!=null){
+			ro=new ResponseObject(0,"注册成功，请注意保存用户名密码",user);
+			return ro;
+		}
+		return ro=new ResponseObject(000001,"未知错误",user);
 	}
 	
 	/**

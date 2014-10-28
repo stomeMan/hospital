@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,8 +16,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -41,7 +38,6 @@ import com.hospital.logger.LogInfo;
 import com.hospital.logger.LogThread;
 
 public class HttpHelper {
-	private static final Log log = LogFactory.getLog(HttpHelper.class);
 	public static String doGetAtfilter(String url, String queryStr, String charset, boolean pretty,HttpServletRequest request) {
 		Date startTime=new Date();
 		String reInfo = "";

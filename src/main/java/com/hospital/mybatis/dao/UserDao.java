@@ -19,6 +19,6 @@ public interface UserDao extends ISqlDao{
     public User selectByPhone(String phone);
     public int insertUsers(List<User> users);
     public List<User> selectByStatus(Integer status);
-
+    public int updateUser(User user);
 
 }

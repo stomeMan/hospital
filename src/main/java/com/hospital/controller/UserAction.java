@@ -14,6 +14,7 @@ import com.alibaba.fastjson.JSON;
 import com.hospital.helper.StringHelper;
 import com.hospital.logic.LoggerLogic;
 import com.hospital.logic.UserLogic;
+import com.hospital.mybatis.model.User;
 import com.hospital.pojo.ResponseObject;
 
 /**
@@ -46,8 +47,8 @@ public class UserAction {
 			return JSON.toJSONString(ro);
 		}
 		ro=userLogic.login(name, password, nickName);
-		if(ro.getResult() instanceof Object){
-			request.setAttribute("user", ro.getResult());
+		if(ro.getInfo() instanceof User){
+			request.setAttribute("user", (User)ro.getInfo());
 		}
 		return JSON.toJSONString(ro);
 	}
@@ -115,6 +116,46 @@ public class UserAction {
 		ResponseObject ro=null;
 		if(StringHelper.isPhoneNumber(phone)){
 			ro=userLogic.getCode(phone);
+		}
+		return JSON.toJSONString(ro);
+	}
+	
+	
+	
+	/**
+	 * 修改密码
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/update_user_password")
+	@ResponseBody
+	public String updateUserPassword(HttpServletRequest request,HttpServletResponse response){
+		String old_password=request.getParameter("old_password");
+		String newpassword1=request.getParameter("newpassword1");
+		String newpassword2=request.getParameter("newpassword2");
+		String name=request.getParameter("name");
+		ResponseObject ro=null;
+	
+		if(old_password==null||old_password.length()==0||newpassword1==null||newpassword1.length()==0||newpassword2==null||newpassword2.length()==0){
+			ro=new ResponseObject(000002,"新旧密码均不能为空","");
+			return JSON.toJSONString(ro);
+		}
+		if(newpassword1.equals(newpassword2)){
+			ro=new ResponseObject(000002,"请确保两次新密码输入密码相同","");
+			return JSON.toJSONString(ro);
+		}
+		User user=userLogic.getUserByName(name);
+		if(user==null){
+			ro=new ResponseObject(000002,"用户名错误","");
+			return JSON.toJSONString(ro);
+		}
+		if(old_password.equals(user.getPassword())){
+			userLogic.updateUser(user);
+			ro=new ResponseObject(0,"ok","");
+			return JSON.toJSONString(ro);
+		}else{
+			ro=new ResponseObject(6,"旧密码错误",old_password);
 		}
 		return JSON.toJSONString(ro);
 	}

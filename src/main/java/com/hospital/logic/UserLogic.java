@@ -58,7 +58,7 @@ public class UserLogic {
 		ro.setCode(0);
 		ro.setMessage("请注意查收验证码");
 		String code=StringHelper.getRadomSixBitNum();
-		ro.setResult(HttpHelper.doGet("", "?code="+code));
+		ro.setInfo(HttpHelper.doGet("", "?code="+code));
 		return ro;
 	}
 	/**
@@ -121,6 +121,9 @@ public class UserLogic {
 	public User getUserByName(String name){
 		return userDao.selectByName(name);
 	}
-	
+	public User updateUser(User user){
+		userDao.updateUser(user);
+		return userDao.selectByName(user.getUserName());
+	}
 	
 }

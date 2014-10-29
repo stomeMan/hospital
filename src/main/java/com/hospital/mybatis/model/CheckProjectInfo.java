@@ -25,7 +25,7 @@ public class CheckProjectInfo implements Serializable{
 	private String checkDate;
 	private String officeSummary;
 	private String officeAdvice;
-	
+	private String healthyFlag;
 	public CheckProjectInfo(){
 		
 	}
@@ -110,6 +110,14 @@ public class CheckProjectInfo implements Serializable{
 		this.officeAdvice = officeAdvice;
 	}
 
+	public String getHealthyFlag() {
+		return healthyFlag;
+	}
+
+	public void setHealthyFlag(String healthyFlag) {
+		this.healthyFlag = healthyFlag;
+	}
+	
 
 		
 	

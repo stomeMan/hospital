@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hospital.mybatis.dao.CheckReservationDao">
+	<resultMap id="BaseResultMap" type="com.hospital.mybatis.model.User">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="project_number" property="projectNumber" jdbcType="VARCHAR" />
+		<result column="user_name" 		property="userName" jdbcType="VARCHAR" />
+		<result column="sign_number" property="signNumber" jdbcType="VARCHAR" />
+		<result column="doctor_name" property="doctorName" jdbcType="VARCHAR" />
+		<result column="doctor_number" property="doctorNumber" jdbcType="INTEGER" />
+		<result column="check_date" property="checkDate" jdbcType="VARCHAR" />
+		<result column="officeSummary" property="officeSummary" jdbcType="VARCHAR" />
+		<result column="office_advice" property="officeAdvice" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,user_name,password,nick_name,gender,age,register_time,phone
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select  id ,project_numer , project_name ,user_name ,sign_number,doctor_name,doctor_number,check_date office_summary,office_advise
+		from user
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectByProjectName" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+			  id ,project_numer , project_name ,user_name ,sign_number,doctor_name,doctor_number,check_date office_summary,office_advise
+		from user
+		where project_name = #{project_name,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByPhone" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+			id,user_name,password,nick_name,gender,age,register_time,phone
+		from user
+		where phone = #{phone,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from pa_msg_info
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<update id="updateCardInfos" parameterType="java.util.List">
+		update card_info
+		<foreach collection="idList" index="index" item="item" open="("
+			separator="," close=")">
+			set status = #{item.status,jdbcType=INTEGER} WHERE id =#{item.id}
+			#{item}
+		</foreach>
+	</update>
+	<update id="updateUser" parameterType="com.hospital.mybatis.model.User">
+		  update card_user
+		  user_name,password,nick_name,gender,age,register_time,phone
+		   set user_name = #{userName,jdbcType=VARCHAR},
+		      password = #{password,jdbcType=VARCHAR},
+		      nick_name = #{nickName,jdbcType=INTEGER},
+		      gender = #{gender,jdbcType=VARCHAR},
+		      age = #{age,jdbcType=INTEGER},
+		      register_time = #{registerTime,jdbcType=INTEGER},
+		      phone = #{status,jdbcType=INTEGER},
+		    where id = #{id,jdbcType=INTEGER}
+	</update>
+	<insert id="insert" parameterType="com.hospital.mybatis.model.User" >
+    	insert into user (user_name,password,nick_name,gender,age,register_time)
+   		 values (#{user_name,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},#{registerTime,jdbcType=VARCHAR})
+ 	 </insert>
+   <insert id="insertCards" parameterType="java.util.List">  
+    INSERT INTO card_info (card_number, password, status, update_time) 
+    VALUES   
+    <foreach collection="list" item="item" index="index" separator="," >  
+    	 (#{item.cardNumber,jdbcType=VARCHAR},#{item.password,jdbcType=VARCHAR}, #{item.status,jdbcType=INTEGER}, #{item.updateTime,jdbcType=VARCHAR})
+    </foreach>  
+  </insert> 
+	<update id="updateCardInfo" parameterType="com.hospital.mybatis.model.CardInfo">
+		update card_info
+<!-- 		set card_number = #{cardNumber,jdbcType=VARCHAR}, -->
+<!-- 		password = #{password,jdbcType=VARCHAR}, -->
+		set status = #{status,jdbcType=INTEGER}
+<!-- 		update_time = #{updateTime,jdbcType=VARCHAR} -->
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

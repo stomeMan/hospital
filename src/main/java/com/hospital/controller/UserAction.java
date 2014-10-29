@@ -24,7 +24,7 @@ import com.hospital.pojo.ResponseObject;
  */
 @Controller
 @RequestMapping("/user")
-public class UserAction {
+public class UserAction  extends BaseAction{
 	@Autowired
 	private UserLogic userLogic;
 	@Autowired

@@ -17,7 +17,7 @@ import com.hospital.pojo.ResponseObject;
  *
  */
 @Controller
-@RequestMapping("/health_doc")
+@RequestMapping("/healthy_doc")
 public class HealthDocAction extends BaseAction{
 
 	@Autowired

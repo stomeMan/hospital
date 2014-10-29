@@ -99,11 +99,11 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'jack', 'jack', 'jack', 'M', '11', '2014-10-11 10:01:01', null);
-INSERT INTO `user` VALUES ('2', 'gaohl', '000', null, null, null, '2014-10-19 13:53:20', null);
-INSERT INTO `user` VALUES ('3', 'gaohl01', '000', null, null, null, '2014-10-19 13:56:09', null);
-INSERT INTO `user` VALUES ('4', 'gaohl0101', '000', null, null, null, '2014-10-19 13:56:16', null);
-INSERT INTO `user` VALUES ('5', 'gaohl010100', '000', null, null, null, '2014-10-19 13:58:51', null);
-INSERT INTO `user` VALUES ('6', '00', '0000001', null, null, null, '2014-10-19 14:00:31', null);
-INSERT INTO `user` VALUES ('7', '0ddd0', '0000001', null, null, null, '2014-10-19 14:03:42', null);
-INSERT INTO `user` VALUES ('8', '0dddd0', '0000001', null, null, null, '2014-10-19 14:03:50', null);
+INSERT INTO `user` VALUES ('1', 'jack', 'jack', 'jack', 'M', '11', '2014-10-11 10:01:01', '');
+INSERT INTO `user` VALUES ('2', 'gaohl', '000', '', '', '', '2014-10-19 13:53:20', '');
+INSERT INTO `user` VALUES ('3', 'gaohl01', '000', '', '','', '2014-10-19 13:56:09', '');
+INSERT INTO `user` VALUES ('4', 'gaohl0101', '000', '', '','', '2014-10-19 13:56:16', '');
+INSERT INTO `user` VALUES ('5', 'gaohl010100', '000', '', '', '', '2014-10-19 13:58:51', '');
+INSERT INTO `user` VALUES ('6', '00', '0000001', '', '', '', '2014-10-19 14:00:31', '');
+INSERT INTO `user` VALUES ('7', '0ddd0', '0000001', '', '', '', '2014-10-19 14:03:42', '');
+INSERT INTO `user` VALUES ('8', '0dddd0', '0000001', '', '', '', '2014-10-19 14:03:50', '');

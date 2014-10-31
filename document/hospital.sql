@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50704
+Source Server         : localhost_3306
+Source Server Version : 50537
 Source Host           : localhost:3306
 Source Database       : hospital
 
 Target Server Type    : MYSQL
-Target Server Version : 50704
+Target Server Version : 50537
 File Encoding         : 65001
 
-Date: 2014-10-30 23:11:23
+Date: 2014-10-31 09:52:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -45,38 +45,39 @@ INSERT INTO `check_project_detail` VALUES ('5', '一般检查项目', '舒张压
 DROP TABLE IF EXISTS `check_project_info`;
 CREATE TABLE `check_project_info` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
-  `project_numer` varchar(128) NOT NULL DEFAULT '',
+  `project_number` varchar(128) NOT NULL DEFAULT '',
   `project_name` varchar(128) DEFAULT '',
-  `username` varchar(128) DEFAULT '',
+  `user_name` varchar(128) DEFAULT '',
   `sign_number` varchar(128) DEFAULT '',
   `doctor_name` varchar(128) DEFAULT '',
   `doctor_number` varchar(128) DEFAULT '',
   `check_date` varchar(128) DEFAULT NULL,
   `office_summary` varchar(1024) DEFAULT NULL,
   `office_advise` varchar(2048) DEFAULT '',
-  PRIMARY KEY (`id`,`project_numer`)
+  `healthy_flag` varchar(4) DEFAULT NULL COMMENT '健康标志，Y表示健康，Ｎ表示不健康',
+  PRIMARY KEY (`id`,`project_number`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of check_project_info
 -- ----------------------------
-INSERT INTO `check_project_info` VALUES ('1', '001', '一般检查项目', 'jack', '20131104-008', '温素芳', '温素芳', '2014.04.16', '体重指数偏高(27.47)', '◆体重指数偏高:\r\n体重指数≥ 24为超重，≥28为肥胖。超出正常者易患高血压、糖尿病、冠心病等。请注意：\r\n(1)首要措施是合理控制饮食，低盐、低脂和低糖类饮食。\r\n(2)多食新鲜水果，保证食物纤维、维生素及微量元素的摄入，烹调时多用凉拌水煮、少用炒、煎、炸的方法。\r\n(3)细嚼慢咽，减少进食量，晚餐宜清淡，睡前四小时不要进食。\r\n(4)坚持多做有氧运动，如打网球、跑步、游泳、跳舞等。\r\n◆体重指数偏高:\r\n体重指数≥ 24为超重，≥28为肥胖。超出正常者易患高血压、糖尿病、冠心病等。请注意：\r\n(1)首要措施是合理控制饮食，低盐、低脂和低糖类饮食。\r\n(2)多食新鲜水果，保证食物纤维、维生素及微量元素的摄入，烹调时多用凉拌水煮、少用炒、煎、炸的方法。\r\n(3)细嚼慢咽，减少进食量，晚餐宜清淡，睡前四小时不要进食。\r\n(4)坚持多做有氧运动，如打网球、跑步、游泳、跳舞等。\r\n');
+INSERT INTO `check_project_info` VALUES ('1', '001', '一般检查项目', 'jack', '20131104-008', '温素芳', '温素芳', '2014.04.16', '体重指数偏高(27.47)', '◆体重指数偏高:\r\n体重指数≥ 24为超重，≥28为肥胖。超出正常者易患高血压、糖尿病、冠心病等。请注意：\r\n(1)首要措施是合理控制饮食，低盐、低脂和低糖类饮食。\r\n(2)多食新鲜水果，保证食物纤维、维生素及微量元素的摄入，烹调时多用凉拌水煮、少用炒、煎、炸的方法。\r\n(3)细嚼慢咽，减少进食量，晚餐宜清淡，睡前四小时不要进食。\r\n(4)坚持多做有氧运动，如打网球、跑步、游泳、跳舞等。\r\n◆体重指数偏高:\r\n体重指数≥ 24为超重，≥28为肥胖。超出正常者易患高血压、糖尿病、冠心病等。请注意：\r\n(1)首要措施是合理控制饮食，低盐、低脂和低糖类饮食。\r\n(2)多食新鲜水果，保证食物纤维、维生素及微量元素的摄入，烹调时多用凉拌水煮、少用炒、煎、炸的方法。\r\n(3)细嚼慢咽，减少进食量，晚餐宜清淡，睡前四小时不要进食。\r\n(4)坚持多做有氧运动，如打网球、跑步、游泳、跳舞等。\r\n', 'N');
 
 -- ----------------------------
--- Table structure for `reservation`
+-- Table structure for `check_reservation`
 -- ----------------------------
-DROP TABLE IF EXISTS `reservation`;
-CREATE TABLE `reservation` (
+DROP TABLE IF EXISTS `check_reservation`;
+CREATE TABLE `check_reservation` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(128) DEFAULT NULL,
-  `phone` varchar(32) DEFAULT NULL,
-  `update_time` varchar(32) DEFAULT NULL,
-  `reservation_time` varchar(32) DEFAULT NULL,
+  `user_name` varchar(128) DEFAULT '',
+  `phone` varchar(32) DEFAULT '',
+  `update_time` varchar(32) DEFAULT '',
+  `reservation_time` varchar(32) DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of reservation
+-- Records of check_reservation
 -- ----------------------------
 
 -- ----------------------------
@@ -94,7 +95,7 @@ CREATE TABLE `user` (
   `phone` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_index` (`user_name`) USING HASH
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user

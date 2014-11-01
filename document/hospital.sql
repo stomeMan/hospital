@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50537
+Source Server         : localhost
+Source Server Version : 50704
 Source Host           : localhost:3306
 Source Database       : hospital
 
 Target Server Type    : MYSQL
-Target Server Version : 50537
+Target Server Version : 50704
 File Encoding         : 65001
 
-Date: 2014-10-31 09:52:19
+Date: 2014-11-02 00:26:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,7 +28,7 @@ CREATE TABLE `check_project_detail` (
   `project_reference_range` varchar(128) DEFAULT '',
   `project_tips` varchar(128) DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of check_project_detail
@@ -38,6 +38,12 @@ INSERT INTO `check_project_detail` VALUES ('2', '一般检查项目', '体重 ',
 INSERT INTO `check_project_detail` VALUES ('3', '一般检查项目', '体重指数', '27.47', null, '18.5～24 ', null);
 INSERT INTO `check_project_detail` VALUES ('4', '一般检查项目', '收缩压 ', '129.00', 'mmHg ', '90～139 ', null);
 INSERT INTO `check_project_detail` VALUES ('5', '一般检查项目', '舒张压 ', '75.00', 'mmHg ', '60～89', null);
+INSERT INTO `check_project_detail` VALUES ('6', '口腔一般项目', '唇', '', '', '', '');
+INSERT INTO `check_project_detail` VALUES ('7', '口腔一般项目', '舌 ', '', '', '', '');
+INSERT INTO `check_project_detail` VALUES ('8', '口腔一般项目', '黏膜', '', '', '', '');
+INSERT INTO `check_project_detail` VALUES ('9', '口腔一般项目', '其他', '', '', '', '');
+INSERT INTO `check_project_detail` VALUES ('10', '口腔一般项目', '牙龈', '牙结石Ⅰ', '', '', '');
+INSERT INTO `check_project_detail` VALUES ('11', '口腔一般项目', '腭 ', '', '', '', '');
 
 -- ----------------------------
 -- Table structure for `check_project_info`
@@ -53,15 +59,16 @@ CREATE TABLE `check_project_info` (
   `doctor_number` varchar(128) DEFAULT '',
   `check_date` varchar(128) DEFAULT NULL,
   `office_summary` varchar(1024) DEFAULT NULL,
-  `office_advise` varchar(2048) DEFAULT '',
+  `office_advise` varchar(1024) DEFAULT '',
   `healthy_flag` varchar(4) DEFAULT NULL COMMENT '健康标志，Y表示健康，Ｎ表示不健康',
   PRIMARY KEY (`id`,`project_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of check_project_info
 -- ----------------------------
 INSERT INTO `check_project_info` VALUES ('1', '001', '一般检查项目', 'jack', '20131104-008', '温素芳', '温素芳', '2014.04.16', '体重指数偏高(27.47)', '◆体重指数偏高:\r\n体重指数≥ 24为超重，≥28为肥胖。超出正常者易患高血压、糖尿病、冠心病等。请注意：\r\n(1)首要措施是合理控制饮食，低盐、低脂和低糖类饮食。\r\n(2)多食新鲜水果，保证食物纤维、维生素及微量元素的摄入，烹调时多用凉拌水煮、少用炒、煎、炸的方法。\r\n(3)细嚼慢咽，减少进食量，晚餐宜清淡，睡前四小时不要进食。\r\n(4)坚持多做有氧运动，如打网球、跑步、游泳、跳舞等。\r\n◆体重指数偏高:\r\n体重指数≥ 24为超重，≥28为肥胖。超出正常者易患高血压、糖尿病、冠心病等。请注意：\r\n(1)首要措施是合理控制饮食，低盐、低脂和低糖类饮食。\r\n(2)多食新鲜水果，保证食物纤维、维生素及微量元素的摄入，烹调时多用凉拌水煮、少用炒、煎、炸的方法。\r\n(3)细嚼慢咽，减少进食量，晚餐宜清淡，睡前四小时不要进食。\r\n(4)坚持多做有氧运动，如打网球、跑步、游泳、跳舞等。\r\n', 'N');
+INSERT INTO `check_project_info` VALUES ('2', '002', '口腔一般项目', 'jack', '20131104-008', '温素芳', '温素芳', '2014.04.16', '牙龈:牙结石Ⅰ°', '◆牙结石Ⅰ°:牙结石是牙周病的重要病因，建议您到口腔科进行超声波洁牙法治疗。', 'N');
 
 -- ----------------------------
 -- Table structure for `check_reservation`
@@ -78,6 +85,23 @@ CREATE TABLE `check_reservation` (
 
 -- ----------------------------
 -- Records of check_reservation
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `reservation`
+-- ----------------------------
+DROP TABLE IF EXISTS `reservation`;
+CREATE TABLE `reservation` (
+  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(128) DEFAULT NULL,
+  `phone` varchar(32) DEFAULT NULL,
+  `update_time` varchar(32) DEFAULT NULL,
+  `reservation_time` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of reservation
 -- ----------------------------
 
 -- ----------------------------

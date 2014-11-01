@@ -3,13 +3,12 @@
 <mapper namespace="com.hospital.mybatis.dao.CheckProjectDetailDao">
 	<resultMap id="BaseResultMap" type="com.hospital.mybatis.model.CheckProjectDetail">
 		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="user_name" property="userName" jdbcType="VARCHAR" />
-		<result column="password" property="password" jdbcType="VARCHAR" />
-		<result column="nick_name" property="nickName" jdbcType="VARCHAR" />
-		<result column="gender" property="gender" jdbcType="VARCHAR" />
-		<result column="age" property="age" jdbcType="INTEGER" />
-		<result column="register_time" property="registerTime" jdbcType="VARCHAR" />
-		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="project_name" property="projectName" jdbcType="VARCHAR" />
+		<result column="single_project_name" property="singleProjectName" jdbcType="VARCHAR" />
+		<result column="project_result" property="projectResult" jdbcType="VARCHAR" />
+		<result column="project_unit" property="projectUnit" jdbcType="VARCHAR" />
+		<result column="project_reference_range" property="projectReferenceRange" jdbcType="VARCHAR" />
+		<result column="project_tips" property="projectTips" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		id,project_name,single_project_name,project_result,project_unit,project_reference_range,project_tips
@@ -21,12 +20,12 @@
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 	
-	<select id="selectByName" resultMap="BaseResultMap"
+	<select id="selectByProjectName" resultMap="BaseResultMap"
 		parameterType="java.lang.String">
 		select
 			 project_name,single_project_name,project_result,project_unit,project_reference_range,project_tips
 		from check_project_detail
-		where user_name = #{user_name,jdbcType=VARCHAR}
+		where project_name=#{projectName,jdbcType=VARCHAR}
 	</select>
 	<select id="selectByPhone" resultMap="BaseResultMap"
 		parameterType="java.lang.String">

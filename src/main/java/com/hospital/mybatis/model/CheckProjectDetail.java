@@ -16,102 +16,54 @@ public class CheckProjectDetail implements Serializable{
 	 */
 	private static final long serialVersionUID = -5797410701040562326L;
 	private int  id;
-	private String projectNumber;
 	private String projectName;
-	private String userName;
-	private String signNumber;
-	private String doctorName;
-	private String doctorNumber;
-	private String checkDate;
-	private String officeSummary;
-	private String officeAdvice;
-	
-	public CheckProjectDetail(){
-		
-	}
-
+	private String singleProjectName;
+	private String projectResult;
+	private String projectUnit;
+	private String projectReferenceRange;
+	private String projectTips;
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public String getProjectNumber() {
-		return projectNumber;
-	}
-
-	public void setProjectNumber(String projectNumber) {
-		this.projectNumber = projectNumber;
-	}
-
 	public String getProjectName() {
 		return projectName;
 	}
-
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
-
-	public String getUserName() {
-		return userName;
+	public String getSingleProjectName() {
+		return singleProjectName;
 	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setSingleProjectName(String singleProjectName) {
+		this.singleProjectName = singleProjectName;
 	}
-
-	public String getSignNumber() {
-		return signNumber;
+	public String getProjectResult() {
+		return projectResult;
 	}
-
-	public void setSignNumber(String signNumber) {
-		this.signNumber = signNumber;
+	public void setProjectResult(String projectResult) {
+		this.projectResult = projectResult;
 	}
-
-	public String getDoctorName() {
-		return doctorName;
+	public String getProjectUnit() {
+		return projectUnit;
 	}
-
-	public void setDoctorName(String doctorName) {
-		this.doctorName = doctorName;
+	public void setProjectUnit(String projectUnit) {
+		this.projectUnit = projectUnit;
 	}
-
-	public String getDoctorNumber() {
-		return doctorNumber;
+	public String getProjectReferenceRange() {
+		return projectReferenceRange;
 	}
-
-	public void setDoctorNumber(String doctorNumber) {
-		this.doctorNumber = doctorNumber;
+	public void setProjectReferenceRange(String projectReferenceRange) {
+		this.projectReferenceRange = projectReferenceRange;
 	}
-
-	public String getCheckDate() {
-		return checkDate;
+	public String getProjectTips() {
+		return projectTips;
 	}
-
-	public void setCheckDate(String checkDate) {
-		this.checkDate = checkDate;
+	public void setProjectTips(String projectTips) {
+		this.projectTips = projectTips;
 	}
-
-	public String getOfficeSummary() {
-		return officeSummary;
-	}
-
-	public void setOfficeSummary(String officeSummary) {
-		this.officeSummary = officeSummary;
-	}
-
-	public String getOfficeAdvice() {
-		return officeAdvice;
-	}
-
-	public void setOfficeAdvice(String officeAdvice) {
-		this.officeAdvice = officeAdvice;
-	}
-
-
-		
 	
 	
 }

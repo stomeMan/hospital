@@ -11,8 +11,9 @@
 		<result column="doctor_number" property="doctorNumber" jdbcType="INTEGER" />
 		<result column="check_date" property="checkDate" jdbcType="VARCHAR" />
 		<result column="office_summary" property="officeSummary" jdbcType="VARCHAR" />
-		<result column="office_advice" property="officeAdvice" jdbcType="VARCHAR" />
+		<result column="office_advise" property="officeAdvice" jdbcType="VARCHAR" />
 		<result column="healthy_flag" property="healthyFlag" jdbcType="VARCHAR" />
+		
 	</resultMap>
 	<sql id="Base_Column_List">
 		id ,project_numer,project_name,user_name,sign_number,doctor_name,doctor_number,check_date ,office_summary,office_advise,healthy_flag
@@ -29,6 +30,16 @@
 		select  id ,project_number,project_name,user_name ,sign_number,doctor_name,doctor_number,check_date, office_summary,office_advise,healthy_flag
 		from check_project_info
 		where user_name = #{userName,jdbcType=VARCHAR}
+	</select>
+	<select id="selectListByUserName" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select  id ,project_number,project_name,user_name ,sign_number,doctor_name,doctor_number,check_date, office_summary,office_advise,healthy_flag
+		from check_project_info
+		where user_name = #{userName,jdbcType=VARCHAR}
+		<if test="healthyFlag!= null">
+		  and healthy_flag=#{healthyFlag,jdbcType=VARCHAR}
+		</if>
+			 
 	</select>
 	<select id="selectByPhone" resultMap="BaseResultMap"
 		parameterType="java.lang.String">

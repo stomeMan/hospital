@@ -1,6 +1,7 @@
 package com.hospital.mybatis.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,6 +17,7 @@ public interface CheckProjectInfoDao extends ISqlDao{
 
     public int insert(User record);
     public CheckProjectInfo selectByPrimaryKey(Integer id);
+    public List<CheckProjectInfo> selectListByUserName(Map<String,String> name);
     public CheckProjectInfo selectByUserName(String name);
     public CheckProjectInfo selectByPhone(String phone);
     public int insertUsers(List<User> users);

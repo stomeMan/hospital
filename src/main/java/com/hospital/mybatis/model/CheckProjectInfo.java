@@ -3,6 +3,7 @@ package com.hospital.mybatis.model;
 import java.io.Serializable;
 
 import org.springframework.stereotype.Repository;
+import java.util.List;
 /**
  * 
  * @author gaohailiang
@@ -26,6 +27,8 @@ public class CheckProjectInfo implements Serializable{
 	private String officeSummary;
 	private String officeAdvice;
 	private String healthyFlag;
+	private List<CheckProjectDetail> checkProjectDetails;
+	
 	public CheckProjectInfo(){
 		
 	}
@@ -102,6 +105,8 @@ public class CheckProjectInfo implements Serializable{
 		this.officeSummary = officeSummary;
 	}
 
+	
+
 	public String getOfficeAdvice() {
 		return officeAdvice;
 	}
@@ -116,6 +121,14 @@ public class CheckProjectInfo implements Serializable{
 
 	public void setHealthyFlag(String healthyFlag) {
 		this.healthyFlag = healthyFlag;
+	}
+
+	public List<CheckProjectDetail> getCheckProjectDetails() {
+		return checkProjectDetails;
+	}
+
+	public void setCheckProjectDetails(List<CheckProjectDetail> checkProjectDetails) {
+		this.checkProjectDetails = checkProjectDetails;
 	}
 	
 

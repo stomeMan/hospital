@@ -1,0 +1,4 @@
+http://localhost:8080/hospital/healthy_doc/get_simple_health_report.json?name=jack
+
+
+http://localhost:8080/hospital/healthy_doc/get_detail_health_report.json?name=jack

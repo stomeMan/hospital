@@ -23,7 +23,7 @@ public class HealthDocLogic {
 	@Autowired
 	private CheckProjectDetailDao checkProjectDetailDao;
 	/**
-	 * 体检报告摘要信息展示
+	 * 获取最近一次体检报告摘要信息展示
 	 * @param userName
 	 * @return
 	 */
@@ -32,17 +32,15 @@ public class HealthDocLogic {
 		Map<String,String> param=new HashMap<String, String>();
 		param.put("userName", userName);
 		param.put("healthyFlag","N");
-	    List<CheckProjectInfo> cp=checkProjectInfoDao.selectListByUserName(param);
-	    if(cp!=null){
-	    	ro.setCode(0);
-			ro.setInfo(cp);
+		List<CheckProjectInfo> cpsis=this.getSimpleHealthReport(param);
+		if(cpsis!=null){
+			ro.setCode(0);
 			ro.setMessage("ok");
 	    }else{
-	    	ro.setCode(0);
-			ro.setInfo(cp);
+	    	ro.setCode(9);
 			ro.setMessage("近期无体检记录");
 	    }
-		
+		ro.setInfo(cpsis);
 		return ro;
 	}
 	
@@ -51,7 +49,7 @@ public class HealthDocLogic {
 		Map<String,String> param=new HashMap<String, String>();
 		param.put("userName", userName);
 		param.put("healthyFlag","N");
-		List<CheckProjectInfo> cps=checkProjectInfoDao.selectListByUserName(param);
+		List<CheckProjectInfo> cps=this.getSimpleHealthReport(param);
 		for(CheckProjectInfo cp:cps){
 			 List<CheckProjectDetail> checkProjectDetails=checkProjectDetailDao.selectByProjectName(cp.getProjectName());
 			 System.out.println(cp.getProjectName());
@@ -66,7 +64,31 @@ public class HealthDocLogic {
 		
 	   return ro;
 	}
-	
+	/**
+	 *  获取最近一次体检报告摘要信息展示
+	 * @param param
+	 * @return
+	 */
+	public List<CheckProjectInfo> getSimpleHealthReport(Map<String,String> param){
+		 List<CheckProjectInfo> cpis=checkProjectInfoDao.selectListByUserName(param);
+		    if(cpis!=null){
+		    	String latestSignNumber="";
+		    	for(int i=cpis.size();i>0;i--){
+		    		CheckProjectInfo cpi=cpis.get(i-1);
+		    		if(cpi!=null){
+		    			if(i!=cpis.size()){
+		    				if(!latestSignNumber.equals(cpi.getSignNumber())){
+		    					cpis.remove(i-1);
+		    				}
+		    			}else{
+		    				latestSignNumber=cpi.getSignNumber();
+		    			}
+		    			
+		    		}
+		    	}
+		    }
+		return cpis;
+	}
 	public ResponseObject getSimpleHealthReportByTime(String userName){
 		ResponseObject ro= new ResponseObject();
 	    CheckProjectInfo cp=checkProjectInfoDao.selectByUserName(userName);

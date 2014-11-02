@@ -39,6 +39,7 @@
 		<if test="healthyFlag!= null">
 		  and healthy_flag=#{healthyFlag,jdbcType=VARCHAR}
 		</if>
+		order by sign_number
 			 
 	</select>
 	<select id="selectByPhone" resultMap="BaseResultMap"

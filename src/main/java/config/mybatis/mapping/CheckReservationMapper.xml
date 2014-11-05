@@ -14,36 +14,36 @@
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select  id,user_name,update_time,phone,reservation_time
-		from reservation
+		from check_reservation
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 	
 	<select id="selectByUserName" resultMap="BaseResultMap"
 		parameterType="java.lang.String">
-		select select  id,user_name,update_time,phone,reservation_time
-		from reservation
+		select   id,user_name,update_time,phone,reservation_time
+		from check_reservation
 		where user_name = #{userName,jdbcType=VARCHAR}
 	</select>
 	<select id="selectByPhone" resultMap="BaseResultMap"
 		parameterType="java.lang.String">
 		select   id,user_name,update_time,phone,reservation_time
-		from reservation
+		from check_reservation
 		where user_name = #{userName,jdbcType=VARCHAR}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from reservation
+		delete from check_reservation
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<update id="updateReservation" parameterType="com.hospital.mybatis.model.CheckReservation">
-		  update reservation
+		  update check_reservation
 		   set user_name = #{userName,jdbcType=VARCHAR},
 		      update_time = #{updateTime,jdbcType=VARCHAR},
-		      phone = #{phone,jdbcType=INTEGER},
-		      reservation_time = #{reservationTime,jdbcType=VARCHAR},
+		      phone = #{phone,jdbcType=VARCHAR},
+		      reservation_time = #{reservationTime,jdbcType=VARCHAR}
 		    where id = #{id,jdbcType=INTEGER}
 	</update>
 	<insert id="insert" parameterType="com.hospital.mybatis.model.CheckReservation" >
-    	insert into reservation (user_name,update_time,phone,reservation_time)
+    	insert into check_reservation (user_name,update_time,phone,reservation_time)
    		 values (#{userName,jdbcType=VARCHAR},#{updateTime,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{reservationTime,jdbcType=VARCHAR})
  	</insert>
 </mapper>

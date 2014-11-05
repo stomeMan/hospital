@@ -2,3 +2,11 @@ http://localhost:8080/hospital/health_doc/get_simple_health_report.json?name=jac
 
 
 http://localhost:8080/hospital/health_doc/get_detail_health_report.json?name=jack
+
+http://localhost:8080/hospital/reservation/select_reservation_by_name.json?name=jack
+
+http://localhost:8080/hospital/reservation/add_reservation_Info.json?name=jack&reservationTime=201411052107&phone=13817860465
+http://localhost:8080/hospital/reservation/add_reservation_Info.json?name=hello&reservationTime=201411052107&phone=13817860465
+
+
+http://localhost:8080/hospital/reservation/update_reservation.json?name=jack&reservationTime=201411052107&phone=15000023174

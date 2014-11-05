@@ -136,6 +136,11 @@ public class DateHelper {
 			return null;
 		}		
 	}
+	/**
+	 * 将date yyyyMMddHHmmss返回
+	 * @param date
+	 * @return
+	 */
 	public static String getDateTimeByyyyyMMddHHmmss(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		try {
@@ -169,8 +174,11 @@ public class DateHelper {
         now.set(Calendar.DATE, now.get(Calendar.MONTH) + 1);
         return now.getTimeInMillis() / 1000;
 	}
-
-	public static String getDateTime() {
+	/**
+	 * 以 yyyyMMddHHmmss格式返回当前时间
+	 * @return
+	 */
+	public static String getNowDateTimeyyyyMMddHHmmss() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		try {
 			return sdf.format(new Date(System.currentTimeMillis()));

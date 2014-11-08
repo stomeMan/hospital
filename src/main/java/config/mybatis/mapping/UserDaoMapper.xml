@@ -48,20 +48,20 @@
 		</foreach>
 	</update>
 	<update id="updateUser" parameterType="com.hospital.mybatis.model.User">
-		  update card_user
-		  user_name,password,nick_name,gender,age,register_time,phone
+		  update user
+		 
 		   set user_name = #{userName,jdbcType=VARCHAR},
 		      password = #{password,jdbcType=VARCHAR},
-		      nick_name = #{nickName,jdbcType=INTEGER},
+		      nick_name = #{nickName,jdbcType=VARCHAR},
 		      gender = #{gender,jdbcType=VARCHAR},
 		      age = #{age,jdbcType=INTEGER},
-		      register_time = #{registerTime,jdbcType=INTEGER},
-		      phone = #{status,jdbcType=INTEGER},
+		      register_time = #{registerTime,jdbcType=VARCHAR},
+		      phone = #{phone,jdbcType=VARCHAR}
 		    where id = #{id,jdbcType=INTEGER}
 	</update>
 	<insert id="insert" parameterType="com.hospital.mybatis.model.User" >
     	insert into user (user_name,password,nick_name,gender,age,register_time)
-   		 values (#{user_name,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},#{registerTime,jdbcType=VARCHAR})
+   		 values (#{userName,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},#{registerTime,jdbcType=VARCHAR})
  	 </insert>
    <insert id="insertCards" parameterType="java.util.List">  
     INSERT INTO card_info (card_number, password, status, update_time) 

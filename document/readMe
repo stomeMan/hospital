@@ -4,7 +4,7 @@
 
 
 
-
+SELECT * FROM hospital.check_project_info cpi order by cpi.check_date limit 1;
 
 
 

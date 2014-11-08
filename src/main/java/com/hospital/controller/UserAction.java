@@ -39,11 +39,11 @@ public class UserAction  extends BaseAction{
 		String nickName=request.getParameter("nickName");
 		ResponseObject ro=null;
 		if(name==null||name.length()==0){
-			ro=new ResponseObject(000001,"用户名不能为空","");
+			ro=new ResponseObject("000001","用户名不能为空","");
 			return JSON.toJSONString(ro);
 		}
 		if(password==null||password.length()==0){
-			ro=new ResponseObject(000002,"密码不能为空","");
+			ro=new ResponseObject("000002","密码不能为空","");
 			return JSON.toJSONString(ro);
 		}
 		ro=userLogic.login(name, password, nickName);
@@ -65,15 +65,19 @@ public class UserAction  extends BaseAction{
 		String nickName=request.getParameter("nickName");
 		ResponseObject ro=null;
 		if(name==null||name.length()==0){
-			ro=new ResponseObject(000001,"用户名不能为空","");
+			ro=new ResponseObject("000001","用户名不能为空","");
 			return JSON.toJSONString(ro);
 		}
 		if(password==null||password.length()==0){
-			ro=new ResponseObject(000002,"密码不能为空","");
+			ro=new ResponseObject("000002","密码不能为空","");
 			return JSON.toJSONString(ro);
 		}
-		if(password1==null||password1.length()==0||password.indexOf(password1)==-1){
-			ro=new ResponseObject(000002,"请确保两次输入密码相同","");
+		if(password1==null||password1.length()==0){
+			ro=new ResponseObject("100002","请确保两次输入密码相同","");
+			return JSON.toJSONString(ro);
+		}
+		if(password.indexOf(password1)==-1){
+			ro=new ResponseObject("100002","请确保两次输入密码相同","");
 			return JSON.toJSONString(ro);
 		}
 		ro=userLogic.register(name, password, nickName);
@@ -94,11 +98,11 @@ public class UserAction  extends BaseAction{
 		ResponseObject ro=null;
 	
 		if(password==null||password.length()==0){
-			ro=new ResponseObject(000002,"密码不能为空","");
+			ro=new ResponseObject("000002","密码不能为空","");
 			return JSON.toJSONString(ro);
 		}
 		if(password1==null||password1.length()==0||password.indexOf(password1)==-1){
-			ro=new ResponseObject(000002,"请确保两次输入密码相同","");
+			ro=new ResponseObject("000002","请确保两次输入密码相同","");
 			return JSON.toJSONString(ro);
 		}
 		ro=userLogic.codeRegister(phone, password, code);
@@ -138,25 +142,47 @@ public class UserAction  extends BaseAction{
 		ResponseObject ro=null;
 	
 		if(old_password==null||old_password.length()==0||newpassword1==null||newpassword1.length()==0||newpassword2==null||newpassword2.length()==0){
-			ro=new ResponseObject(000002,"新旧密码均不能为空","");
+			ro=new ResponseObject("000002","新旧密码均不能为空","");
 			return JSON.toJSONString(ro);
 		}
-		if(newpassword1.equals(newpassword2)){
-			ro=new ResponseObject(000002,"请确保两次新密码输入密码相同","");
+		if(!newpassword1.equals(newpassword2)){
+			ro=new ResponseObject("000002","请确保两次新密码输入密码相同","");
 			return JSON.toJSONString(ro);
 		}
 		User user=userLogic.getUserByName(name);
 		if(user==null){
-			ro=new ResponseObject(000002,"用户名错误","");
+			ro=new ResponseObject("000002","用户名错误","");
 			return JSON.toJSONString(ro);
 		}
 		if(old_password.equals(user.getPassword())){
+			user.setPassword(newpassword1);
 			userLogic.updateUser(user);
-			ro=new ResponseObject(0,"ok","");
+			ro=new ResponseObject("0","ok",user);
 			return JSON.toJSONString(ro);
 		}else{
-			ro=new ResponseObject(6,"旧密码错误",old_password);
+			ro=new ResponseObject("6","旧密码错误",old_password);
 		}
+		return JSON.toJSONString(ro);
+	}
+	
+	
+	/**
+	 * 修改密码
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/update_user_info")
+	@ResponseBody
+	public String updateUserInfo(HttpServletRequest request,HttpServletResponse response){
+		ResponseObject ro=new ResponseObject();
+		String password=request.getParameter("password");
+		String name=request.getParameter("name");
+		String age=request.getParameter("age");
+		String phone=request.getParameter("phone");
+		String nickName=request.getParameter("nickName");
+		String gender=request.getParameter("gender");
+		ro=userLogic.updateUser(name, gender, password, phone, age, nickName);
 		return JSON.toJSONString(ro);
 	}
 	/**

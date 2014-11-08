@@ -34,10 +34,10 @@ public class HealthDocLogic {
 		param.put("healthyFlag","N");
 		List<CheckProjectInfo> cpsis=this.getSimpleHealthReport(param);
 		if(cpsis!=null){
-			ro.setCode(0);
+			ro.setCode("0");
 			ro.setMessage("ok");
 	    }else{
-	    	ro.setCode(9);
+	    	ro.setCode("9");
 			ro.setMessage("近期无体检记录");
 	    }
 		ro.setInfo(cpsis);
@@ -56,7 +56,7 @@ public class HealthDocLogic {
 			 cp.setCheckProjectDetails(checkProjectDetails);
 		}
 	   if(cps!=null){
-		   	ro.setCode(0);
+		   	ro.setCode("0");
 			ro.setInfo(cps);
 			ro.setMessage("ok");
 	   }
@@ -92,7 +92,7 @@ public class HealthDocLogic {
 	public ResponseObject getSimpleHealthReportByTime(String userName){
 		ResponseObject ro= new ResponseObject();
 	    CheckProjectInfo cp=checkProjectInfoDao.selectByUserName(userName);
-		ro.setCode(0);
+		ro.setCode("0");
 		ro.setInfo(cp);
 		ro.setMessage("ok");
 		return ro;
@@ -100,7 +100,7 @@ public class HealthDocLogic {
 	public ResponseObject getSimpleHealthReportBySubject(String userName){
 		ResponseObject ro= new ResponseObject();
 	    CheckProjectInfo cp=checkProjectInfoDao.selectByUserName(userName);
-		ro.setCode(0);
+		ro.setCode("0");
 		ro.setInfo(cp);
 		ro.setMessage("ok");
 		return ro;
@@ -108,7 +108,7 @@ public class HealthDocLogic {
 public ResponseObject getBadHealthReport(String userName){
 		ResponseObject ro= new ResponseObject();
 	    CheckProjectInfo cp=checkProjectInfoDao.selectByUserName(userName);
-		ro.setCode(0);
+		ro.setCode("0");
 		ro.setInfo(cp);
 		ro.setMessage("ok");
 		return ro;

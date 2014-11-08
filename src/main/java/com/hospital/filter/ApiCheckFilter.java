@@ -66,7 +66,7 @@ public class ApiCheckFilter extends BaseFilter implements Filter{
 			Integer timeLimit = Constant.timeLimit;
 			if(interval < 0 || interval > timeLimit){
 				result.setMessage("请求超时");
-				result.setCode(1);
+				result.setCode("1");
 				return result;
 			}
 			return null;

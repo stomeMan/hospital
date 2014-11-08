@@ -28,7 +28,7 @@ public class PackAction {
 	@RequestMapping("/sayhello")
 	@ResponseBody
 	public String sayHello(){
-		ResponseObject ro=new ResponseObject(0,"ok",null);
+		ResponseObject ro=new ResponseObject("0","ok",null);
 		return JSON.toJSONString(ro);
 	}
 	

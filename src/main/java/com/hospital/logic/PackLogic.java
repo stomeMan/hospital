@@ -73,13 +73,13 @@ public class PackLogic {
 			if(cardInfo!=null){
 				 cv =new CardView(cardInfo.getCardNumber(),cardInfo.getPassword());
 			}
-			return new ResponseObject(1,"您已经领取过红包，请保存好用户名密码",cv);
+			return new ResponseObject("1","您已经领取过红包，请保存好用户名密码",cv);
 		}
 		cv=  this.updateCardAndCardUser(userId);//不成功去抢未被领取的红包
 		if(cv==null){
-			return new ResponseObject(2,"对不起，红包已被抢光",cv);
+			return new ResponseObject("2","对不起，红包已被抢光",cv);
 		}
-		return new ResponseObject(0,"恭喜您，红包领取成功，请保存好卡号和密码",cv);
+		return new ResponseObject("0","恭喜您，红包领取成功，请保存好卡号和密码",cv);
 	}
 	/**
 	 * 

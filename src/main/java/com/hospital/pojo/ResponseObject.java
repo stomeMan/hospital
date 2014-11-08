@@ -1,13 +1,13 @@
 package com.hospital.pojo;
 
 public class ResponseObject {
-	private int code;
+	private String code;
 	private String message;
 	private Object info;
-	public int getCode() {
+	public String getCode() {
 		return code;
 	}
-	public void setCode(int code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 	public String getMessage() {
@@ -23,7 +23,7 @@ public class ResponseObject {
 	public void setInfo(Object info) {
 		this.info = info;
 	}
-	public ResponseObject(int code, String message, Object info) {
+	public ResponseObject(String code, String message, Object info) {
 		super();
 		this.code = code;
 		this.message = message;

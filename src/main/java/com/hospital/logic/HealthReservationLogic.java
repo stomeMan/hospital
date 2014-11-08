@@ -27,12 +27,26 @@ public class HealthReservationLogic {
 	
 	public ResponseObject addCheckReservation(CheckReservation cr){
 		ResponseObject ro=new ResponseObject();
+		
+		CheckReservation newcr= healthReservationDao.selectByUserName(cr.getUserName());
+		if(newcr!=null){
+			ro.setCode("0");
+			ro.setMessage("添加成功");
+			healthReservationDao.updateReservation(cr);
+		}else{
+			ro.setCode("0");
+			ro.setMessage("添加成功");
+			healthReservationDao.insert(cr);
+		}
 		ro.setInfo(cr);
-		ro.setCode(0);
-		ro.setMessage("添加成功");
-		healthReservationDao.insert(cr);
+		
 		return ro;
 	}
+	/**
+	 * 
+	 * @param cr
+	 * @return
+	 */
 	public ResponseObject updateCheckReservation(CheckReservation cr){
 		ResponseObject ro=new ResponseObject();
 		CheckReservation newcr= healthReservationDao.selectByUserName(cr.getUserName());
@@ -41,23 +55,30 @@ public class HealthReservationLogic {
 		newcr.setUpdateTime(DateHelper.getDateTimeByNow());
 		healthReservationDao.updateReservation(newcr);
 		ro.setInfo(cr);
-		ro.setCode(0);
+		ro.setCode("0");
 		ro.setMessage("修改成功");
 		return ro;
 	}
 	public ResponseObject selectCheckReservation(String name){
 		ResponseObject ro=new ResponseObject();
 		CheckReservation cr= healthReservationDao.selectByUserName(name);
-		ro.setInfo(cr);
-		ro.setCode(0);
-		ro.setMessage("ok");
+		if(cr!=null){
+			ro.setInfo(cr);
+			ro.setCode("0");
+			ro.setMessage("ok");
+		}else{
+			ro.setInfo(cr);
+			ro.setCode("100404");
+			ro.setMessage("无此用户预约信息");
+		}
+		
 		return ro;
 	}
 	public ResponseObject selectCheckReservationByPhone(String phone){
 		ResponseObject ro=new ResponseObject();
 		CheckReservation cr= healthReservationDao.selectByPhone(phone);
 		ro.setInfo(cr);
-		ro.setCode(0);
+		ro.setCode("0");
 		ro.setMessage("ok");
 		return ro;
 	}
